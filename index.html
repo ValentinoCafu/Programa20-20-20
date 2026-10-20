@@ -1,0 +1,1809 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programa 20-20-20 · Tecsur & Luz del Sur</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- SheetJS para exportación nativa a Excel (.xlsx) -->
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            tecsur: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              500: '#0055ff',
+              600: '#0047ba',
+              700: '#003896',
+              800: '#002970',
+              900: '#071633',
+            },
+            amberBrand: {
+              400: '#fbbf24',
+              500: '#f59e0b',
+              600: '#d97706',
+            },
+            lds: {
+              50: '#fff7ed',
+              500: '#ea580c',
+              600: '#c2410c',
+              700: '#9a3412',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .badge-cargo {
+      font-size: 0.65rem;
+      padding: 0.18rem 0.5rem;
+      border-radius: 9999px;
+      font-weight: 700;
+      letter-spacing: 0.025em;
+    }
+    .hero-banner-mask {
+      background: linear-gradient(180deg, rgba(7, 22, 51, 0.4) 0%, rgba(7, 22, 51, 0.85) 100%);
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-900 min-h-screen flex flex-col antialiased">
+
+  <!-- Header Corporativo Oficial Tecsur -->
+  <header class="bg-tecsur-900 border-b border-slate-800 text-white sticky top-0 z-50 shadow-lg">
+    <div class="max-w-6xl mx-auto px-4 py-2.5 sm:py-3 flex items-center justify-between">
+      
+      <!-- Brand Logo y Título -->
+      <div class="flex items-center space-x-3 cursor-pointer group" onclick="volverAInicio()">
+        <img src="assets/tecsur-logo.jpg" alt="Tecsur Logo" class="h-9 w-9 rounded-lg object-cover shadow-sm ring-1 ring-white/20 group-hover:scale-105 transition-transform">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-base font-black tracking-wider text-white">TECSUR</span>
+            <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-amberBrand-500 text-slate-950 shadow-sm">
+              Programa 20-20-20
+            </span>
+          </div>
+          <p class="text-[11px] text-slate-300 font-medium hidden sm:block">
+            Modelo de Actuación de la Línea de Liderazgo · Frente Luz del Sur
+          </p>
+        </div>
+      </div>
+
+      <!-- Acceso Rápido a Jefatura -->
+      <div class="flex items-center gap-2">
+        <button id="btn-admin-header" onclick="iniciarLogin('JEFE_SECCION')" class="text-xs text-white bg-tecsur-600 hover:bg-tecsur-500 px-3.5 py-2 rounded-xl font-bold shadow-md hover:shadow-tecsur-500/20 flex items-center gap-1.5 transition border border-blue-400/30">
+          <i data-lucide="shield-check" class="w-4 h-4 text-amberBrand-400"></i>
+          <span>Portal Jefatura</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Contenedor Principal Dinámico -->
+  <main class="flex-1 max-w-6xl w-full mx-auto p-4 sm:p-6 md:p-8">
+
+    <!-- ========================================== -->
+    <!-- PASO 1: HOME CON HERO BANNER Y 3 ROLES     -->
+    <!-- ========================================== -->
+    <div id="pantalla-inicio" class="space-y-6">
+
+      <!-- Hero Banner Visual con Imagen de Campo y Sede Tecsur -->
+      <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-300/80 group">
+        <img src="assets/tecsur-banner-campo.png" alt="Tecsur en campo" class="w-full h-56 sm:h-72 object-cover object-center group-hover:scale-[1.02] transition-transform duration-700 ease-out">
+        <div class="absolute inset-0 hero-banner-mask flex flex-col justify-end p-6 sm:p-8 text-white">
+          <div class="max-w-2xl space-y-2">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-amberBrand-500 text-slate-950 shadow">
+              <i data-lucide="zap" class="w-3.5 h-3.5 fill-current"></i> Evaluación Operativa en Terreno
+            </span>
+            <h2 class="text-2xl sm:text-4xl font-black tracking-tight leading-tight drop-shadow-md">
+              ¿El trabajo se ejecuta bien, seguro y conforme?
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-200 leading-relaxed drop-shadow">
+              Un solo lenguaje conductual para calibrar al supervisor en campo. Selecciona tu rol para registrar la evidencia observada en la visita técnica.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Título de Selección -->
+      <div class="text-center pt-2">
+        <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
+          Selecciona tu rol para iniciar la evaluación
+        </h3>
+        <p class="text-xs text-slate-500 mt-1">
+          Cada actor califica únicamente los comportamientos observables de su ámbito de interacción directa.
+        </p>
+      </div>
+
+      <!-- Las 3 Tarjetas de Rol Mejoradas (UX Avanzado) -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 pt-1">
+        
+        <!-- 1. Capataz -->
+        <button onclick="iniciarLogin('CAPATAZ')" class="group relative bg-white border-2 border-slate-200 hover:border-amberBrand-500 rounded-3xl p-6 text-left shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-200 flex flex-col justify-between overflow-hidden">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-amberBrand-500/10 rounded-bl-full -z-0"></div>
+          <div class="relative z-10">
+            <div class="w-14 h-14 rounded-2xl bg-amberBrand-500/15 text-amberBrand-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-inner">
+              <i data-lucide="hard-hat" class="w-8 h-8"></i>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-amberBrand-100 text-amberBrand-700 tracking-wider">
+                Contratista · Cuadrilla
+              </span>
+            </div>
+            <h4 class="text-xl font-black text-slate-900 mt-2">Soy Capataz</h4>
+            <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+              Evalúa materiales a tiempo, charla previa de 5 min, uso de EPPs, orientación técnica y buen trato en el frente.
+            </p>
+          </div>
+          <div class="relative z-10 mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-amberBrand-600">
+            <span class="flex items-center gap-1">
+              <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> 7 preguntas · 2 min
+            </span>
+            <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1.5 transition-transform"></i>
+          </div>
+        </button>
+
+        <!-- 2. Coordinador de Proyecto Contratista -->
+        <button onclick="iniciarLogin('COORD_CONTRATISTA')" class="group relative bg-white border-2 border-slate-200 hover:border-tecsur-500 rounded-3xl p-6 text-left shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-200 flex flex-col justify-between overflow-hidden">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-blue-500/10 rounded-bl-full -z-0"></div>
+          <div class="relative z-10">
+            <div class="w-14 h-14 rounded-2xl bg-blue-500/15 text-tecsur-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-inner">
+              <i data-lucide="clipboard-list" class="w-8 h-8"></i>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-blue-100 text-tecsur-700 tracking-wider">
+                Contratista · Gestión
+              </span>
+            </div>
+            <h4 class="text-xl font-black text-slate-900 mt-2">Soy Coord. de Proyectos</h4>
+            <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+              Evalúa programación de SST, asignación de cuadrillas, gestión de permisos policiales/viales y cierre conforme.
+            </p>
+          </div>
+          <div class="relative z-10 mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-tecsur-600">
+            <span class="flex items-center gap-1">
+              <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> 9 preguntas · 3 min
+            </span>
+            <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1.5 transition-transform"></i>
+          </div>
+        </button>
+
+        <!-- 3. Luz del Sur -->
+        <button onclick="iniciarLogin('LUZ_DEL_SUR')" class="group relative bg-white border-2 border-slate-200 hover:border-lds-500 rounded-3xl p-6 text-left shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-200 flex flex-col justify-between overflow-hidden">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-orange-500/10 rounded-bl-full -z-0"></div>
+          <div class="relative z-10">
+            <div class="w-14 h-14 rounded-2xl bg-orange-500/15 text-lds-500 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-inner">
+              <i data-lucide="shield-check" class="w-8 h-8"></i>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-orange-100 text-lds-600 tracking-wider">
+                Cliente · Fiscalización
+              </span>
+            </div>
+            <h4 class="text-xl font-black text-slate-900 mt-2">Soy Luz del Sur</h4>
+            <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+              Evalúa contraste con planos y normas LDS, señalización pública, protección a terceros y supervisión crítica.
+            </p>
+          </div>
+          <div class="relative z-10 mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-lds-500">
+            <span class="flex items-center gap-1">
+              <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> 10 preguntas · 3 min
+            </span>
+            <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1.5 transition-transform"></i>
+          </div>
+        </button>
+
+      </div>
+
+      <!-- Banner de Acceso a Jefatura de Sección (Con Imagen Sunset) -->
+      <div class="relative rounded-3xl overflow-hidden shadow-xl border border-slate-800 bg-slate-900 text-white mt-6">
+        <img src="assets/tecsur-sunset.jpg" alt="Operaciones al atardecer" class="absolute inset-0 w-full h-full object-cover object-center opacity-30">
+        <div class="relative z-10 p-6 sm:p-7 flex flex-wrap items-center justify-between gap-4">
+          <div class="max-w-xl space-y-1.5">
+            <div class="flex items-center gap-2">
+              <span class="text-[10px] font-black uppercase px-2.5 py-0.5 rounded bg-blue-600 text-white tracking-wider">
+                Exclusivo Jefaturas Tecsur
+              </span>
+            </div>
+            <h4 class="text-lg sm:text-xl font-black tracking-tight">
+              ¿Eres Jefe de Sección? Evaluación 20-20-20 & Consolidado 360°
+            </h4>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Califica los 20 comportamientos de tus 24 supervisores, ingresa las métricas duras (avance %, accidentes, calidad) y exporta los reportes automáticos en Excel.
+            </p>
+          </div>
+          <button onclick="iniciarLogin('JEFE_SECCION')" class="px-5 py-3 bg-amberBrand-500 hover:bg-amberBrand-400 text-slate-950 text-xs font-black rounded-2xl shadow-lg transition flex items-center gap-2 shrink-0">
+            <span>Ingresar al Portal Jefatura</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ========================================== -->
+    <!-- MODAL DE PIN / CONTRASEÑA POR ROL          -->
+    <!-- ========================================== -->
+    <div id="modal-login" class="hidden fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-slate-200 space-y-4">
+        <div class="flex justify-between items-center">
+          <div class="flex items-center gap-2.5">
+            <div id="login-icono" class="w-9 h-9 rounded-xl bg-tecsur-50 text-tecsur-600 flex items-center justify-center font-bold">
+              <i data-lucide="lock" class="w-5 h-5"></i>
+            </div>
+            <h3 id="login-titulo-rol" class="text-base font-extrabold text-slate-900">Validar Acceso</h3>
+          </div>
+          <button onclick="cerrarLogin()" class="text-slate-400 hover:text-slate-600 p-1">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+
+        <p class="text-xs text-slate-600">
+          Ingresa la clave de acceso autorizada para tu rol:
+        </p>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1 uppercase tracking-wider">Clave de Seguridad:</label>
+          <input type="password" id="input-pin" placeholder="••••••••" class="w-full text-center tracking-widest text-lg font-mono px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-tecsur-500 focus:bg-white">
+          <p id="error-pin" class="hidden text-xs text-rose-600 mt-1.5 font-bold flex items-center gap-1">
+            <i data-lucide="alert-circle" class="w-3.5 h-3.5"></i> Clave incorrecta. Inténtalo de nuevo.
+          </p>
+          <div class="mt-3 text-[11px] text-slate-600 bg-slate-100 rounded-xl p-2.5 border border-slate-200">
+            <span class="font-bold text-slate-800">Claves activas del sistema:</span><br>
+            Capataz: <code class="bg-white px-1.5 py-0.5 rounded border font-bold text-slate-900">CAPATAZ2026</code> · Coord: <code class="bg-white px-1.5 py-0.5 rounded border font-bold text-slate-900">COORD2026</code><br>
+            Luz del Sur: <code class="bg-white px-1.5 py-0.5 rounded border font-bold text-slate-900">LDS2026</code> · Jefatura: <code class="bg-white px-1.5 py-0.5 rounded border font-bold text-slate-900">JEFE2026</code>
+          </div>
+        </div>
+
+        <div class="flex gap-2 pt-2">
+          <button onclick="cerrarLogin()" class="flex-1 py-2.5 px-3 border border-slate-300 rounded-xl text-xs font-bold text-slate-700 hover:bg-slate-50">
+            Cancelar
+          </button>
+          <button onclick="verificarLogin()" class="flex-1 py-2.5 px-3 bg-tecsur-600 hover:bg-tecsur-700 text-white rounded-xl text-xs font-bold shadow-md transition">
+            Entrar a Evaluar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- PASO 2: CONTEXTO (CONTRATISTA + SUPERVISOR)-->
+    <!-- ========================================== -->
+    <div id="pantalla-datos" class="hidden space-y-6 max-w-2xl mx-auto">
+      <div class="flex items-center justify-between border-b border-slate-200 pb-4">
+        <div>
+          <button onclick="volverAInicio()" class="text-xs text-tecsur-600 hover:underline flex items-center gap-1 font-bold mb-1">
+            <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Cambiar de rol
+          </button>
+          <h2 class="text-2xl font-black text-slate-900" id="titulo-paso-datos">Contexto de la Evaluación</h2>
+          <p class="text-xs text-slate-500">Completa estos datos antes de calificar los comportamientos.</p>
+        </div>
+        <div id="badge-rol-actual" class="px-3.5 py-1.5 rounded-full text-xs font-black uppercase tracking-wider shadow-sm">
+          <!-- Dinámico -->
+        </div>
+      </div>
+
+      <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-7 shadow-sm space-y-5">
+        
+        <!-- Bloque Subcontratista (Solo si es Capataz o Coord Contratista) -->
+        <div id="seccion-subcontratista" class="space-y-2">
+          <label class="block text-xs font-extrabold uppercase tracking-wider text-slate-700">
+            1. Empresa Subcontratista de Campo <span class="text-rose-500">*</span>
+          </label>
+          <select id="select-subcontratista" onchange="toggleOtraContratista(this.value)" class="w-full px-3.5 py-3 bg-slate-50 border border-slate-300 rounded-2xl text-sm font-semibold focus:ring-2 focus:ring-tecsur-500 focus:bg-white outline-none transition">
+            <option value="">-- Seleccione la empresa contratista --</option>
+            <option value="COBRA PERU S.A.">COBRA PERÚ S.A.</option>
+            <option value="CAM PERU S.R.L.">CAM PERÚ S.R.L.</option>
+            <option value="EIFFAGE ENERGIA">EIFFAGE ENERGÍA</option>
+            <option value="CONSORCIO ELECTRICO LIMA">CONSORCIO ELÉCTRICO LIMA</option>
+            <option value="INGENIEROS Y CONTRATISTAS">INGENIEROS Y CONTRATISTAS S.A.</option>
+            <option value="OTRA">OTRA EMPRESA (Especificar nombre)</option>
+          </select>
+          <input type="text" id="input-otra-contratista" placeholder="Escriba el nombre exacto de la contratista..." class="hidden w-full px-3.5 py-2.5 text-sm border border-slate-300 rounded-xl mt-2 bg-slate-50 focus:bg-white">
+        </div>
+
+        <!-- Nombre del Evaluador -->
+        <div class="space-y-1.5">
+          <label class="block text-xs font-extrabold uppercase tracking-wider text-slate-700">
+            2. Nombre de quien evalúa <span class="text-xs font-normal text-slate-400">(Opcional / Para trazabilidad)</span>
+          </label>
+          <input type="text" id="input-nombre-evaluador" placeholder="Ej. Carlos Huamán" class="w-full px-3.5 py-3 bg-slate-50 border border-slate-300 rounded-2xl text-sm focus:ring-2 focus:ring-tecsur-500 focus:bg-white outline-none transition">
+        </div>
+
+        <!-- Selector Inteligente de Supervisor (Master de 24) -->
+        <div class="space-y-2 pt-3 border-t border-slate-100">
+          <div class="flex justify-between items-center">
+            <label class="block text-xs font-extrabold uppercase tracking-wider text-slate-700">
+              3. Supervisor Tecsur a Evaluar <span class="text-rose-500">*</span>
+            </label>
+            <span class="text-[11px] font-bold text-tecsur-600 bg-tecsur-50 px-2 py-0.5 rounded-full">24 supervisores</span>
+          </div>
+
+          <!-- Filtro rápido por Centro de Rendimiento -->
+          <div class="flex gap-2 mb-2">
+            <button type="button" onclick="filtrarSupervisores('TODOS')" id="filtro-cr-todos" class="px-3 py-1 text-xs rounded-xl font-bold bg-slate-900 text-white shadow-sm">Todos (24)</button>
+            <button type="button" onclick="filtrarSupervisores('4301')" id="filtro-cr-4301" class="px-3 py-1 text-xs rounded-xl font-bold bg-slate-100 text-slate-700 hover:bg-slate-200">CR 4301 Obras BT (21)</button>
+            <button type="button" onclick="filtrarSupervisores('4070')" id="filtro-cr-4070" class="px-3 py-1 text-xs rounded-xl font-bold bg-slate-100 text-slate-700 hover:bg-slate-200">CR 4070 Planif. BT (3)</button>
+          </div>
+
+          <select id="select-supervisor" class="w-full px-3.5 py-3 bg-slate-50 border border-slate-300 rounded-2xl text-sm font-bold text-slate-800 focus:ring-2 focus:ring-tecsur-500 focus:bg-white outline-none transition">
+            <option value="">-- Seleccione al supervisor de Tecsur --</option>
+            <!-- Llenado dinámico vía JS -->
+          </select>
+        </div>
+
+        <!-- Obra / SST / Frente de Trabajo -->
+        <div class="space-y-1.5 pt-3 border-t border-slate-100">
+          <label class="block text-xs font-extrabold uppercase tracking-wider text-slate-700">
+            4. Proyecto, Frente u Obra Observada <span class="text-xs font-normal text-slate-400">(SST / Ubicación)</span>
+          </label>
+          <input type="text" id="input-proyecto" placeholder="Ej. SST-1048 Alimentador Surco / Redes BT San Borja" class="w-full px-3.5 py-3 bg-slate-50 border border-slate-300 rounded-2xl text-sm focus:ring-2 focus:ring-tecsur-500 focus:bg-white outline-none transition">
+        </div>
+
+        <div class="pt-4">
+          <button onclick="irACuestionario()" class="w-full py-4 bg-tecsur-600 hover:bg-tecsur-500 text-white rounded-2xl font-black text-sm shadow-xl hover:shadow-tecsur-500/30 transition flex items-center justify-center gap-2">
+            <span>Comenzar Evaluación de Comportamientos</span>
+            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- PASO 3: CUESTIONARIO CONDUCTUAL DINÁMICO   -->
+    <!-- ========================================== -->
+    <div id="pantalla-cuestionario" class="hidden space-y-6 max-w-4xl mx-auto">
+      
+      <!-- Resumen Fijo Superior con Barra de Progreso Dinámica -->
+      <div class="bg-white border border-slate-200 rounded-3xl p-4 sm:p-5 shadow-lg sticky top-16 z-40 space-y-3">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <span class="text-[10px] font-black uppercase tracking-wider text-tecsur-600 block" id="subtitulo-rol-cuestionario"></span>
+            <h3 id="resumen-nombre-supervisor" class="text-base sm:text-lg font-black text-slate-900"></h3>
+            <p id="resumen-cr-supervisor" class="text-xs text-slate-500 font-medium"></p>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="text-right">
+              <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Avance</span>
+              <div id="indicador-progreso" class="text-xs font-black text-tecsur-600">0 / 0 respondidas</div>
+            </div>
+            <button onclick="enviarEvaluacion()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2.5 rounded-2xl text-xs font-black shadow-md flex items-center gap-1.5 transition">
+              <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+              <span>Guardar Evaluación</span>
+            </button>
+          </div>
+        </div>
+        <!-- Barra de Progreso Visual -->
+        <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
+          <div id="barra-progreso-fill" class="bg-emerald-500 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <!-- Guía Rápida de la Escala Tecsur -->
+      <div class="bg-slate-900 text-white rounded-2xl p-4 text-xs shadow-md space-y-2">
+        <div class="flex items-center justify-between">
+          <span class="font-black text-amberBrand-400 flex items-center gap-1.5 tracking-wider uppercase text-[11px]">
+            <i data-lucide="help-circle" class="w-4 h-4"></i> Escala Oficial de Evaluación (Personas & Cultura Tecsur):
+          </span>
+          <span class="text-[10px] text-slate-400 font-medium">Programa 20-20-20</span>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-6 gap-2 text-[11px] pt-1">
+          <div class="bg-slate-800/80 p-2 rounded-xl border border-rose-500/30">
+            <strong class="text-rose-400 block text-xs">0 · Ausente</strong>
+            <span class="text-[10px] text-slate-300">No ocurre o no hay evidencia.</span>
+          </div>
+          <div class="bg-slate-800/80 p-2 rounded-xl border border-amber-500/30">
+            <strong class="text-amber-400 block text-xs">50 · Irregular</strong>
+            <span class="text-[10px] text-slate-300">Ocurre a veces; omisiones.</span>
+          </div>
+          <div class="bg-slate-800/80 p-2 rounded-xl border border-blue-500/30">
+            <strong class="text-blue-400 block text-xs">75 · En parte</strong>
+            <span class="text-[10px] text-slate-300">Mayoría de casos, con apoyo.</span>
+          </div>
+          <div class="bg-slate-800/80 p-2 rounded-xl border border-emerald-500/30">
+            <strong class="text-emerald-400 block text-xs">100 · Conforme</strong>
+            <span class="text-[10px] text-slate-300">Estándar esperado en campo.</span>
+          </div>
+          <div class="bg-slate-800/80 p-2 rounded-xl border border-indigo-500/30">
+            <strong class="text-indigo-400 block text-xs">120 · Sostenido</strong>
+            <span class="text-[10px] text-slate-300">Referente; modela y enseña.</span>
+          </div>
+          <div class="bg-slate-800/80 p-2 rounded-xl border border-slate-700">
+            <strong class="text-slate-400 block text-xs">N/A · No aplica</strong>
+            <span class="text-[10px] text-slate-400">No presenciado en visita.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contenedor de Preguntas Agrupadas por Bloques -->
+      <div id="contenedor-preguntas" class="space-y-6">
+        <!-- Render dinámico vía JS -->
+      </div>
+
+      <!-- Botón Inferior de Envío -->
+      <div class="pt-4 pb-12">
+        <button onclick="enviarEvaluacion()" class="w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl font-black text-base shadow-xl hover:shadow-emerald-500/30 transition flex items-center justify-center gap-2">
+          <i data-lucide="send" class="w-5 h-5"></i>
+          <span>Finalizar y Guardar Evaluación</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ========================================== -->
+    <!-- PASO 4: PANTALLA DE ÉXITO / CONFIRMACIÓN    -->
+    <!-- ========================================== -->
+    <div id="pantalla-exito" class="hidden text-center py-16 px-4 space-y-5 max-w-lg mx-auto">
+      <div class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-3xl flex items-center justify-center mx-auto shadow-inner ring-8 ring-emerald-50">
+        <i data-lucide="check" class="w-10 h-10 stroke-[3]"></i>
+      </div>
+      <h2 class="text-3xl font-black text-slate-900 tracking-tight">¡Evaluación Registrada!</h2>
+      <p class="text-sm text-slate-600 leading-relaxed">
+        Las calificaciones de los comportamientos observables han sido consolidadas de forma segura en el sistema de Tecsur. Gracias por contribuir a la excelencia operativa.
+      </p>
+      <div class="pt-4 flex flex-col sm:flex-row justify-center gap-3">
+        <button onclick="volverAInicio()" class="py-3 px-6 bg-slate-900 text-white rounded-2xl text-xs font-black hover:bg-slate-800 transition shadow">
+          Realizar otra evaluación
+        </button>
+        <button onclick="irAPortalJefaturaDirecto()" class="py-3 px-6 bg-tecsur-600 text-white rounded-2xl text-xs font-black hover:bg-tecsur-500 transition shadow">
+          Ir al Portal de Jefatura
+        </button>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- PORTAL JEFATURA DE SECCIÓN (CONSOLIDADO)   -->
+    <!-- ========================================== -->
+    <div id="pantalla-jefatura" class="hidden space-y-6">
+      
+      <!-- Cabecera de Jefatura -->
+      <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-4">
+        <div>
+          <button onclick="volverAInicio()" class="text-xs text-tecsur-600 hover:underline flex items-center gap-1 font-bold mb-1">
+            <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Salir al inicio
+          </button>
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 flex items-center gap-2">
+            Portal Jefatura de Sección
+            <span class="text-xs bg-amberBrand-500 text-slate-950 px-3 py-1 rounded-full font-black uppercase tracking-wider">
+              Consolidador 360°
+            </span>
+          </h2>
+          <p class="text-xs text-slate-500 mt-0.5">
+            Evalúa los 20 comportamientos por supervisor, carga las métricas duras y exporta los indicadores a Excel.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2">
+          <!-- Botón de Exportar a Excel (.xlsx) Destacado -->
+          <button onclick="exportarExcelCompletoXLSX()" class="text-xs text-white bg-emerald-600 hover:bg-emerald-500 border border-emerald-700 px-4 py-2.5 rounded-2xl font-black flex items-center gap-2 transition shadow-md hover:shadow-emerald-500/30">
+            <i data-lucide="file-spreadsheet" class="w-4 h-4 text-emerald-200"></i>
+            <span>Exportar a Excel (.xlsx)</span>
+          </button>
+          <button onclick="exportarDataCrudaCSV()" class="text-xs text-slate-700 bg-white hover:bg-slate-50 border border-slate-300 px-3 py-2.5 rounded-2xl font-bold flex items-center gap-1.5 transition shadow-sm">
+            <i data-lucide="download" class="w-3.5 h-3.5"></i>
+            <span>CSV</span>
+          </button>
+          <button onclick="limpiarDatosPrueba()" class="text-xs text-rose-600 hover:text-rose-800 border border-rose-200 px-2.5 py-2.5 rounded-2xl hover:bg-rose-50 transition font-medium">
+            Resetear
+          </button>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- TABLERO EJECUTIVO DE KPIS EN VIVO (VISIBLES)-->
+      <!-- ========================================== -->
+      <div class="space-y-3">
+        
+        <!-- Fila 1: Indicadores Clave de Alto Nivel -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          
+          <!-- 1. Índice Global Conductual -->
+          <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm flex items-center justify-between">
+            <div>
+              <span class="text-[11px] font-black text-slate-400 uppercase tracking-wider block">Índice Global de Desempeño</span>
+              <div class="flex items-baseline gap-2 mt-1">
+                <span id="kpi-promedio-global" class="text-4xl font-black text-tecsur-900 tracking-tight">-</span>
+                <span class="text-xs text-slate-400 font-bold">/ 120 pts</span>
+              </div>
+              <div id="kpi-badge-global" class="mt-2.5 inline-block">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-slate-100 text-slate-500 uppercase tracking-wider">Sin evaluaciones</span>
+              </div>
+            </div>
+            <div class="w-14 h-14 rounded-2xl bg-tecsur-50 text-tecsur-600 flex items-center justify-center shadow-inner">
+              <i data-lucide="gauge" class="w-7 h-7"></i>
+            </div>
+          </div>
+
+          <!-- 2. Semaforización de la Población de Supervisores -->
+          <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div>
+              <span class="text-[11px] font-black text-slate-400 uppercase tracking-wider block mb-2.5">Distribución de Semáforos (24 Supervisores)</span>
+              <div class="grid grid-cols-4 gap-2 text-center text-[10px]">
+                <div class="bg-indigo-50 border border-indigo-200 rounded-2xl p-2">
+                  <span class="font-bold text-indigo-700 block text-[9px] uppercase">Sostenido</span>
+                  <strong id="kpi-count-azul" class="text-lg text-indigo-900 font-black">0</strong>
+                </div>
+                <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-2">
+                  <span class="font-bold text-emerald-700 block text-[9px] uppercase">Conforme</span>
+                  <strong id="kpi-count-verde" class="text-lg text-emerald-900 font-black">0</strong>
+                </div>
+                <div class="bg-amber-50 border border-amber-200 rounded-2xl p-2">
+                  <span class="font-bold text-amber-700 block text-[9px] uppercase">En Parte</span>
+                  <strong id="kpi-count-amarillo" class="text-lg text-amber-900 font-black">0</strong>
+                </div>
+                <div class="bg-rose-50 border border-rose-200 rounded-2xl p-2">
+                  <span class="font-bold text-rose-700 block text-[9px] uppercase">Crítico</span>
+                  <strong id="kpi-count-rojo" class="text-lg text-rose-900 font-black">0</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Brecha de Percepción (Jefatura vs Externos) -->
+          <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div>
+              <span class="text-[11px] font-black text-slate-400 uppercase tracking-wider block">Brecha Jefatura vs Campo / LDS</span>
+              <div class="flex items-baseline gap-2 mt-1">
+                <span id="kpi-brecha-valor" class="text-4xl font-black text-slate-900 tracking-tight">0 pts</span>
+                <span id="kpi-brecha-estado" class="text-xs font-black text-emerald-700 bg-emerald-100 px-2.5 py-0.5 rounded-full uppercase tracking-wider">Alineado</span>
+              </div>
+              <p id="kpi-brecha-desc" class="text-[11px] text-slate-500 mt-2 leading-tight">
+                Comparación en tiempo real entre la evaluación del Jefe de Sección y los evaluadores de terreno.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Fila 2: Los 4 Pilares del Desempeño (Cualitativo + Cuantitativo) -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          
+          <!-- Pilar 1: Seguridad -->
+          <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-1">
+            <div class="flex items-center justify-between text-slate-500 text-xs">
+              <span class="font-black uppercase tracking-wider text-[10px] text-slate-700">1. Seguridad (SST)</span>
+              <i data-lucide="shield-alert" class="w-4 h-4 text-rose-600"></i>
+            </div>
+            <div class="flex items-baseline justify-between pt-1">
+              <span id="kpi-pilar-seg-nota" class="text-2xl font-black text-slate-900">- pts</span>
+              <span id="kpi-pilar-seg-dura" class="text-[10px] font-bold text-slate-600 bg-slate-100 px-2 py-0.5 rounded-full">0 incidentes</span>
+            </div>
+            <span class="text-[10px] text-slate-400 block font-medium">Comps. 3, 8, 12, 13, 17, 18</span>
+          </div>
+
+          <!-- Pilar 2: Objetivos -->
+          <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-1">
+            <div class="flex items-center justify-between text-slate-500 text-xs">
+              <span class="font-black uppercase tracking-wider text-[10px] text-slate-700">2. Objetivos y Plazos</span>
+              <i data-lucide="target" class="w-4 h-4 text-blue-600"></i>
+            </div>
+            <div class="flex items-baseline justify-between pt-1">
+              <span id="kpi-pilar-obj-nota" class="text-2xl font-black text-slate-900">- pts</span>
+              <span id="kpi-pilar-obj-dura" class="text-[10px] font-bold text-slate-600 bg-slate-100 px-2 py-0.5 rounded-full">Avance: - %</span>
+            </div>
+            <span class="text-[10px] text-slate-400 block font-medium">Comps. 1, 5, 6, 9, 10, 20</span>
+          </div>
+
+          <!-- Pilar 3: Calidad -->
+          <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-1">
+            <div class="flex items-center justify-between text-slate-500 text-xs">
+              <span class="font-black uppercase tracking-wider text-[10px] text-slate-700">3. Calidad del Servicio</span>
+              <i data-lucide="check-square" class="w-4 h-4 text-emerald-600"></i>
+            </div>
+            <div class="flex items-baseline justify-between pt-1">
+              <span id="kpi-pilar-cal-nota" class="text-2xl font-black text-slate-900">- pts</span>
+              <span id="kpi-pilar-cal-dura" class="text-[10px] font-bold text-slate-600 bg-slate-100 px-2 py-0.5 rounded-full">0 no conform.</span>
+            </div>
+            <span class="text-[10px] text-slate-400 block font-medium">Comps. 2, 4, 7, 14, 15</span>
+          </div>
+
+          <!-- Pilar 4: Habilidades Blandas -->
+          <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-1">
+            <div class="flex items-center justify-between text-slate-500 text-xs">
+              <span class="font-black uppercase tracking-wider text-[10px] text-slate-700">4. Liderazgo y Blandas</span>
+              <i data-lucide="users" class="w-4 h-4 text-indigo-600"></i>
+            </div>
+            <div class="flex items-baseline justify-between pt-1">
+              <span id="kpi-pilar-bla-nota" class="text-2xl font-black text-slate-900">- pts</span>
+              <span class="text-[10px] font-black text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded-full uppercase">Cruce 360°</span>
+            </div>
+            <span class="text-[10px] text-slate-400 block font-medium">Comps. 11, 16, 19</span>
+          </div>
+
+        </div>
+
+        <!-- Fila 3: Conteo Rápido de Participación -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+          <div class="bg-white px-3.5 py-2.5 rounded-xl border border-slate-200 flex items-center justify-between shadow-sm">
+            <span class="text-slate-600 font-bold">Eval. Jefatura (20 C.):</span>
+            <strong id="stat-jefe" class="font-black text-tecsur-600 text-sm">0</strong>
+          </div>
+          <div class="bg-white px-3.5 py-2.5 rounded-xl border border-slate-200 flex items-center justify-between shadow-sm">
+            <span class="text-slate-600 font-bold">Capataz (7 C.):</span>
+            <strong id="stat-capataz" class="font-black text-amberBrand-600 text-sm">0</strong>
+          </div>
+          <div class="bg-white px-3.5 py-2.5 rounded-xl border border-slate-200 flex items-center justify-between shadow-sm">
+            <span class="text-slate-600 font-bold">Coord. Contratista:</span>
+            <strong id="stat-coord" class="font-black text-cyan-600 text-sm">0</strong>
+          </div>
+          <div class="bg-white px-3.5 py-2.5 rounded-xl border border-slate-200 flex items-center justify-between shadow-sm">
+            <span class="text-slate-600 font-bold">Luz del Sur (10 C.):</span>
+            <strong id="stat-lds" class="font-black text-lds-500 text-sm">0</strong>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Tabla Maestra de los 24 Supervisores -->
+      <div class="bg-white border border-slate-200 rounded-3xl shadow-sm overflow-hidden">
+        <div class="p-5 border-b border-slate-200 flex flex-wrap items-center justify-between gap-3 bg-slate-50">
+          <div>
+            <h3 class="font-black text-sm text-slate-900">Matriz de Desempeño y Calibración (24 Supervisores)</h3>
+            <p class="text-xs text-slate-500">Haz clic en <strong>"Evaluar 20 Comps"</strong> para calificar o en <strong>"Cargar KPIs"</strong> para ingresar datos duros.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <input type="text" id="filtro-tabla-nombre" onkeyup="filtrarTablaSupervisores(this.value)" placeholder="Buscar por nombre o CR..." class="text-xs px-3.5 py-2 border border-slate-300 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-tecsur-500">
+          </div>
+        </div>
+
+        <div class="overflow-x-auto custom-scroll">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-100/80 text-slate-600 uppercase font-extrabold tracking-wider text-[10px] border-b border-slate-200">
+              <tr>
+                <th class="p-3.5">Supervisor</th>
+                <th class="p-3.5">CR</th>
+                <th class="p-3.5">Cargo</th>
+                <th class="p-3.5 text-center">Eval. Jefatura<br>(20 Comportamientos)</th>
+                <th class="p-3.5 text-center">Externos<br>(Cap / Coord / LDS)</th>
+                <th class="p-3.5 text-center">Data Dura<br>(Obj / Seg / Cal)</th>
+                <th class="p-3.5 text-center">Semáforo Consolidado</th>
+                <th class="p-3.5 text-right">Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-supervisores-cuerpo" class="divide-y divide-slate-100">
+              <!-- Render dinámico vía JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ========================================== -->
+  <!-- MODAL: CARGA DE DATA DURA (JEFE SECCIÓN)   -->
+  <!-- ========================================== -->
+  <div id="modal-data-dura" class="hidden fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-7 shadow-2xl border border-slate-200 space-y-5">
+      <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+        <div>
+          <span class="text-[10px] font-black text-tecsur-600 uppercase tracking-wider">Métricas Duras de Gestión</span>
+          <h3 id="modal-dura-supervisor" class="text-lg font-black text-slate-900"></h3>
+        </div>
+        <button onclick="cerrarModalDataDura()" class="text-slate-400 hover:text-slate-600 p-1">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="space-y-4 text-xs">
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">1. Cumplimiento de Objetivos (Avance Físico %):</label>
+          <input type="number" id="input-kpi-objetivos" min="0" max="100" placeholder="Ej. 92" class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl bg-slate-50 focus:bg-white text-sm font-semibold">
+          <span class="text-[10px] text-slate-400">Meta esperada ≥ 90%</span>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">2. Cumplimiento de Seguridad (N° Incidentes / Observaciones Abiertas):</label>
+          <input type="number" id="input-kpi-seguridad" min="0" placeholder="0" class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl bg-slate-50 focus:bg-white text-sm font-semibold">
+          <span class="text-[10px] text-slate-400">Meta: 0 incidentes / 0 amonestaciones</span>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">3. Calidad del Servicio (N° No Conformidades Técnicas LDS):</label>
+          <input type="number" id="input-kpi-calidad" min="0" placeholder="0" class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl bg-slate-50 focus:bg-white text-sm font-semibold">
+          <span class="text-[10px] text-slate-400">Meta: 0 no conformidades / 0 retrasos por calidad</span>
+        </div>
+      </div>
+
+      <div class="flex gap-2 pt-3 border-t border-slate-100">
+        <button onclick="cerrarModalDataDura()" class="flex-1 py-2.5 px-3 border border-slate-300 rounded-xl text-xs font-bold text-slate-700 hover:bg-slate-50">Cancelar</button>
+        <button onclick="guardarDataDura()" class="flex-1 py-2.5 px-3 bg-tecsur-600 hover:bg-tecsur-700 text-white rounded-xl text-xs font-bold shadow-md">Guardar Métricas</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: FICHA EJECUTIVA 360° / ANÁLISIS     -->
+  <!-- ========================================== -->
+  <div id="modal-ficha-360" class="hidden fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-7 shadow-2xl border border-slate-200 space-y-5 max-h-[90vh] overflow-y-auto custom-scroll">
+      <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+        <div>
+          <span class="text-[10px] font-black text-tecsur-600 uppercase tracking-wider">Ficha de Desempeño 360° · Programa 20-20-20</span>
+          <h3 id="ficha-nombre-sup" class="text-xl font-black text-slate-900"></h3>
+          <p id="ficha-detalle-sup" class="text-xs text-slate-500 font-medium"></p>
+        </div>
+        <button onclick="cerrarFicha360()" class="text-slate-400 hover:text-slate-600 p-1">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Calificaciones Comparadas -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-center">
+        <div class="bg-blue-50 border border-blue-200 rounded-2xl p-3 shadow-sm">
+          <span class="text-[10px] uppercase font-black text-tecsur-700">Jefe de Sección</span>
+          <div id="ficha-score-jefe" class="text-2xl font-black text-tecsur-900 mt-1">-</div>
+          <span class="text-[9px] text-blue-600 font-bold">20 comportamientos</span>
+        </div>
+        <div class="bg-amber-50 border border-amber-200 rounded-2xl p-3 shadow-sm">
+          <span class="text-[10px] uppercase font-black text-amber-800">Capataz</span>
+          <div id="ficha-score-capataz" class="text-2xl font-black text-amber-900 mt-1">-</div>
+          <span class="text-[9px] text-amber-700 font-bold">Frente de Campo</span>
+        </div>
+        <div class="bg-cyan-50 border border-cyan-200 rounded-2xl p-3 shadow-sm">
+          <span class="text-[10px] uppercase font-black text-cyan-800">Coord. Contratista</span>
+          <div id="ficha-score-coord" class="text-2xl font-black text-cyan-900 mt-1">-</div>
+          <span class="text-[9px] text-cyan-700 font-bold">Gestión de Obra</span>
+        </div>
+        <div class="bg-orange-50 border border-orange-200 rounded-2xl p-3 shadow-sm">
+          <span class="text-[10px] uppercase font-black text-lds-600">Luz del Sur</span>
+          <div id="ficha-score-lds" class="text-2xl font-black text-lds-700 mt-1">-</div>
+          <span class="text-[9px] text-orange-700 font-bold">Cliente Final</span>
+        </div>
+      </div>
+
+      <!-- Análisis de Brecha (Gap Analysis) -->
+      <div id="ficha-box-brecha" class="p-4 rounded-2xl border text-xs shadow-sm">
+        <!-- Render dinámico -->
+      </div>
+
+      <!-- Data Dura Registrada -->
+      <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 space-y-2.5">
+        <h4 class="font-black text-xs text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
+          <i data-lucide="bar-chart-2" class="w-4 h-4 text-tecsur-600"></i> Métricas Duras del Supervisor
+        </h4>
+        <div class="grid grid-cols-3 gap-2.5 text-xs">
+          <div class="bg-white p-2.5 rounded-xl border border-slate-200 shadow-sm">
+            <span class="text-[10px] text-slate-400 uppercase font-bold block">Avance Objetivos:</span>
+            <strong id="ficha-kpi-obj" class="text-slate-900 text-sm font-black">-</strong>
+          </div>
+          <div class="bg-white p-2.5 rounded-xl border border-slate-200 shadow-sm">
+            <span class="text-[10px] text-slate-400 uppercase font-bold block">Incidentes Seguridad:</span>
+            <strong id="ficha-kpi-seg" class="text-slate-900 text-sm font-black">-</strong>
+          </div>
+          <div class="bg-white p-2.5 rounded-xl border border-slate-200 shadow-sm">
+            <span class="text-[10px] text-slate-400 uppercase font-bold block">No Conformidades:</span>
+            <strong id="ficha-kpi-cal" class="text-slate-900 text-sm font-black">-</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-2 flex justify-end">
+        <button onclick="cerrarFicha360()" class="px-5 py-2.5 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-slate-800 transition shadow">
+          Cerrar Ficha
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPT DE LÓGICA Y DATOS -->
+  <script>
+    // 1. DATA MAESTRA DE SUPERVISORES (24)
+    const SUPERVISORES = [
+      { id: 'sup-01', nombre: 'CARDENAS YNGA MARTHA ELENA', cargo: 'SUPERVISOR C', cr: '4070', crDesc: 'PLANIFICACION OBRAS Y MANTTO BT' },
+      { id: 'sup-02', nombre: 'MELGAREJO DIAZ STEVEN ALFREDO', cargo: 'SUPERVISOR C', cr: '4070', crDesc: 'PLANIFICACION OBRAS Y MANTTO BT' },
+      { id: 'sup-03', nombre: 'YATACO NAVARRO KEWIN HAROLD STEVE', cargo: 'SUPERVISOR C', cr: '4070', crDesc: 'PLANIFICACION OBRAS Y MANTTO BT' },
+      { id: 'sup-04', nombre: 'AYMA CHAUPIS EDSON LEONARDO', cargo: 'SUPERVISOR C', cr: '4301', crDesc: 'OBRAS BAJA TENSION' },
+      { id: 'sup-05', nombre: 'YAPU ABARCA LARRY ERICK', cargo: 'SUPERVISOR C', cr: '4301', crDesc: 'OBRAS BAJA TENSION' },
+      { id: 'sup-06', nombre: 'RAMOS AUQUE LUIS ALBERTO', cargo: 'SUPERVISOR C', cr: '4301', crDesc: 'OBRAS BAJA TENSION' },
+      { id: 'sup-07', nombre: 'DIBURCIO RAMOS MARCO ANTONIO', cargo: 'SUPERVISOR C', cr: '4301', crDesc: 'OBRAS BAJA TENSION' },
+      { id: 'sup-08', nombre: 'HERMITANO LEON SMITH FRANCKLIN', cargo: 'SUPERVISOR C', cr: '4301', crDesc: 'OBRAS BAJA TENSION' },
+      { id: 'sup-09', nombre: 'QUISPE ALFARO BLADIMIRO', cargo: 'SUPERVISOR B', cr: '4301', crDesc: 'OBRAS BAJA TENSION' },
+      { id: 'sup-10', nombre: 'VASCO MALLMA DENIS MARXS', cargo: 'SUPERVISOR C', cr: '4301', crDesc: 'OBRAS BAJA TENSION' },
+      { id: 'sup-11', nombre: 'HERNANDEZ LOPEZ FREDDY ANTONIO', cargo: 'SUPERVISOR C', cr: '4301', crDesc: 'OBRAS BAJA TENSION' },
+      { id: 'sup-12', nombre: 'VALLEJOS HOLGUIN CESAR ELOY', cargo: 'SUPERVISOR C', cr: '4301', crDesc: 'OBRAS BAJA TENSION' },
+      { id: 'sup-13', nombre: 'ESPIRILLA CACERES MARCO ANTONIO', cargo: 'SUPERVISOR C', cr: '4301', crDesc: 'OBRAS BAJA TENSION' },
+      { id: 'sup-14', nombre: 'VALENCIA AZULA SAMUEL ALEJANDRO', cargo: 'SUPERVISOR C', cr: '4301', crDesc: 'OBRAS BAJA TENSION' },
+      { id: 'sup-15', nombre: 'ELIAS MANRIQUE ALEXANDER ALEXIS', cargo: 'SUPERVISOR C', cr: '4301', crDesc: 'OBRAS BAJA TENSION' },
+      { id: 'sup-16', nombre: 'DOMINGUEZ RAMIREZ HENRY', cargo: 'SUPERVISOR C', cr: '4301', crDesc: 'OBRAS BAJA TENSION' },
+      { id: 'sup-17', nombre: 'CHIRITO MILLONES VICTOR JUAN RODOLFO', cargo: 'SUPERVISOR C', cr: '4301', crDesc: 'OBRAS BAJA TENSION' },
+      { id: 'sup-18', nombre: 'REANO LEON HANS ERNESTO', cargo: 'SUPERVISOR C', cr: '4301', crDesc: 'OBRAS BAJA TENSION' },
+      { id: 'sup-19', nombre: 'ARANGO PENA RAUL ROLANDO', cargo: 'SUPERVISOR JUNIOR', cr: '4301', crDesc: 'OBRAS BAJA TENSION' },
+      { id: 'sup-20', nombre: 'VILLA DIAZ JOEL ALFREDO', cargo: 'SUPERVISOR C', cr: '4301', crDesc: 'OBRAS BAJA TENSION' },
+      { id: 'sup-21', nombre: 'CHILENO DIAZ ELVIS JOSEPH', cargo: 'SUPERVISOR C', cr: '4301', crDesc: 'OBRAS BAJA TENSION' },
+      { id: 'sup-22', nombre: 'QUIMPER REYNOSO IVAN', cargo: 'SUPERVISOR C', cr: '4301', crDesc: 'OBRAS BAJA TENSION' },
+      { id: 'sup-23', nombre: 'RAMIREZ QUISPE LUIS ANTONNY', cargo: 'SUPERVISOR C', cr: '4301', crDesc: 'OBRAS BAJA TENSION' },
+      { id: 'sup-24', nombre: 'CARBAJAL VILLASANA JOEL', cargo: 'SUPERVISOR C', cr: '4301', crDesc: 'OBRAS BAJA TENSION' }
+    ];
+
+    // 2. DATA MAESTRA DE COMPORTAMIENTOS TECSUR (20)
+    const COMPORTAMIENTOS = [
+      // BLOQUE 1: INICIO Y VALIDACIÓN TÉCNICA (1-4)
+      { id: 1, bloque: 'INICIO Y VALIDACIÓN TÉCNICA', criterio: 'OBJETIVOS', desc: 'Realiza la inspección previa del frente de trabajo antes de autorizar el inicio de las actividades.', roles: ['COORD_CONTRATISTA', 'JEFE_SECCION'] },
+      { id: 2, bloque: 'INICIO Y VALIDACIÓN TÉCNICA', criterio: 'CALIDAD', desc: 'Contrasta las condiciones reales del campo con el alcance, planos, croquis, especificaciones técnicas y requisitos del cliente.', roles: ['LUZ_DEL_SUR', 'JEFE_SECCION'] },
+      { id: 3, bloque: 'INICIO Y VALIDACIÓN TÉCNICA', criterio: 'SEGURIDAD', desc: 'Verifica que la SST cuente con la documentación completa, vigente y admisible antes de iniciar los trabajos.', roles: ['LUZ_DEL_SUR', 'JEFE_SECCION'] },
+      { id: 4, bloque: 'INICIO Y VALIDACIÓN TÉCNICA', criterio: 'CALIDAD', desc: 'Identifica oportunamente interferencias, accesos restringidos, riesgos del entorno, condiciones climáticas u otros obstáculos que puedan afectar la ejecución.', roles: ['LUZ_DEL_SUR', 'COORD_CONTRATISTA', 'JEFE_SECCION'] },
+      
+      // BLOQUE 2: PLANIFICACIÓN Y PREPARACIÓN (5-10)
+      { id: 5, bloque: 'PLANIFICACIÓN Y PREPARACIÓN', criterio: 'OBJETIVOS', desc: 'Programa las actividades y distribuye las SST de acuerdo con las prioridades operativas, los plazos comprometidos, la criticidad de los trabajos y la capacidad disponible.', roles: ['COORD_CONTRATISTA', 'JEFE_SECCION'] },
+      { id: 6, bloque: 'PLANIFICACIÓN Y PREPARACIÓN', criterio: 'OBJETIVOS', desc: 'Asigna o reasigna cuadrillas, frentes de trabajo y recursos de supervisión de acuerdo con la carga operativa y la criticidad de las actividades.', roles: ['COORD_CONTRATISTA', 'JEFE_SECCION'] },
+      { id: 7, bloque: 'PLANIFICACIÓN Y PREPARACIÓN', criterio: 'CALIDAD', desc: 'Verifica anticipadamente la disponibilidad, cantidad, condición y especificación de los materiales requeridos para ejecutar el trabajo.', roles: ['CAPATAZ', 'COORD_CONTRATISTA', 'JEFE_SECCION'] },
+      { id: 8, bloque: 'PLANIFICACIÓN Y PREPARACIÓN', criterio: 'SEGURIDAD', desc: 'Verifica que los equipos, herramientas, vehículos, maquinaria y recursos especiales requeridos se encuentren disponibles, operativos y en condiciones seguras.', roles: ['CAPATAZ', 'COORD_CONTRATISTA', 'JEFE_SECCION'] },
+      { id: 9, bloque: 'PLANIFICACIÓN Y PREPARACIÓN', criterio: 'OBJETIVOS', desc: 'Gestiona con anticipación los permisos, resguardos, apoyo policial, prevención vial, accesos, maquinaria u otros recursos necesarios para ejecutar el trabajo de forma segura y continua.', roles: ['COORD_CONTRATISTA', 'JEFE_SECCION'] },
+      { id: 10, bloque: 'PLANIFICACIÓN Y PREPARACIÓN', criterio: 'OBJETIVOS', desc: 'Identifica actividades críticas y establece medidas preventivas, coordinaciones o reprogramaciones para evitar impactos en seguridad, calidad, plazo o continuidad del servicio.', roles: ['COORD_CONTRATISTA', 'JEFE_SECCION'] },
+      
+      // BLOQUE 3: SUPERVISIÓN Y EJECUCIÓN EN CAMPO (11-16)
+      { id: 11, bloque: 'SUPERVISIÓN Y EJECUCIÓN EN CAMPO', criterio: 'HABILIDADES_BLANDAS', desc: 'Realiza y registra la Instrucción Previa en Campo, comunicando las tareas, riesgos, controles, responsabilidades y cambios de condición al equipo.', roles: ['CAPATAZ', 'JEFE_SECCION'] },
+      { id: 12, bloque: 'SUPERVISIÓN Y EJECUCIÓN EN CAMPO', criterio: 'SEGURIDAD', desc: 'Verifica antes y durante la ejecución el uso correcto de EPP y el cumplimiento de los controles de seguridad establecidos.', roles: ['CAPATAZ', 'LUZ_DEL_SUR', 'JEFE_SECCION'] },
+      { id: 13, bloque: 'SUPERVISIÓN Y EJECUCIÓN EN CAMPO', criterio: 'SEGURIDAD', desc: 'Verifica que la zona de trabajo cuente con señalización, delimitación y condiciones adecuadas para proteger a trabajadores, peatones, terceros y tránsito.', roles: ['LUZ_DEL_SUR', 'JEFE_SECCION'] },
+      { id: 14, bloque: 'SUPERVISIÓN Y EJECUCIÓN EN CAMPO', criterio: 'CALIDAD', desc: 'Verifica que el personal y los contratistas cuenten con autorizaciones, identificación vigente, competencias y requisitos documentarios aplicables antes de ejecutar actividades.', roles: ['LUZ_DEL_SUR', 'COORD_CONTRATISTA', 'JEFE_SECCION'] },
+      { id: 15, bloque: 'SUPERVISIÓN Y EJECUCIÓN EN CAMPO', criterio: 'CALIDAD', desc: 'Supervisa directamente los momentos críticos de la actividad y verifica que el trabajo se ejecute de acuerdo con los planos, procedimientos, especificaciones técnicas y estándares del cliente.', roles: ['LUZ_DEL_SUR', 'JEFE_SECCION'] },
+      { id: 16, bloque: 'SUPERVISIÓN Y EJECUCIÓN EN CAMPO', criterio: 'HABILIDADES_BLANDAS', desc: 'Brinda orientación técnica clara al capataz y a la cuadrilla, resuelve consultas y corrige oportunamente prácticas que puedan generar riesgos, retrabajos o incumplimientos.', roles: ['CAPATAZ', 'JEFE_SECCION'] },
+      
+      // BLOQUE 4: GESTIÓN DE SEGURIDAD, CONTROL Y CIERRE (17-20)
+      { id: 17, bloque: 'GESTIÓN DE SEGURIDAD, CONTROL Y CIERRE', criterio: 'SEGURIDAD', desc: 'Identifica, registra y comunica actos o condiciones subestándares; realiza inspecciones y observaciones preventivas y verifica la aplicación de Toma 5 y ALERT.', roles: ['CAPATAZ', 'JEFE_SECCION'] },
+      { id: 18, bloque: 'GESTIÓN DE SEGURIDAD, CONTROL Y CIERRE', criterio: 'SEGURIDAD', desc: 'Paraliza el trabajo ante una condición de riesgo inminente, comunica la situación a la línea de mando y verifica la corrección antes de autorizar el reinicio.', roles: ['CAPATAZ', 'LUZ_DEL_SUR', 'JEFE_SECCION'] },
+      { id: 19, bloque: 'GESTIÓN DE SEGURIDAD, CONTROL Y CIERRE', criterio: 'HABILIDADES_BLANDAS', desc: 'Gestiona cambios, interferencias, replanteos, contingencias y restricciones durante la ejecución; evalúa su impacto, obtiene las autorizaciones requeridas y registra las decisiones tomadas.', roles: ['COORD_CONTRATISTA', 'LUZ_DEL_SUR', 'JEFE_SECCION'] },
+      { id: 20, bloque: 'GESTIÓN DE SEGURIDAD, CONTROL Y CIERRE', criterio: 'OBJETIVOS', desc: 'Da seguimiento al avance, indicadores, observaciones y compromisos de cierre, asegurando la conformidad técnica, ambiental, documentaria y económica de la SST.', roles: ['COORD_CONTRATISTA', 'LUZ_DEL_SUR', 'JEFE_SECCION'] }
+    ];
+
+    const CLAVES = {
+      CAPATAZ: 'CAPATAZ2026',
+      COORD_CONTRATISTA: 'COORD2026',
+      LUZ_DEL_SUR: 'LDS2026',
+      JEFE_SECCION: 'JEFE2026'
+    };
+
+    // Estado Global
+    let rolSeleccionado = null;
+    let rolLogueado = null;
+    let supervisorSeleccionado = null;
+    let respuestasActuales = {};
+    let supervisorDataDuraModal = null;
+
+    window.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      poblarSelectSupervisores(SUPERVISORES);
+      actualizarEstadisticasJefatura();
+    });
+
+    function mostrarPantalla(id) {
+      ['pantalla-inicio', 'pantalla-datos', 'pantalla-cuestionario', 'pantalla-exito', 'pantalla-jefatura'].forEach(p => {
+        document.getElementById(p).classList.add('hidden');
+      });
+      document.getElementById(id).classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      lucide.createIcons();
+    }
+
+    function volverAInicio() {
+      rolSeleccionado = null;
+      rolLogueado = null;
+      respuestasActuales = {};
+      mostrarPantalla('pantalla-inicio');
+    }
+
+    function irAPortalJefaturaDirecto() {
+      rolLogueado = 'JEFE_SECCION';
+      mostrarPantalla('pantalla-jefatura');
+      renderizarTablaSupervisores();
+    }
+
+    // Modal de Login
+    function iniciarLogin(rol) {
+      rolSeleccionado = rol;
+      const modal = document.getElementById('modal-login');
+      const titulo = document.getElementById('login-titulo-rol');
+      const input = document.getElementById('input-pin');
+      const error = document.getElementById('error-pin');
+
+      error.classList.add('hidden');
+      input.value = '';
+
+      if (rol === 'CAPATAZ') titulo.textContent = 'Acceso Capataz Contratista';
+      else if (rol === 'COORD_CONTRATISTA') titulo.textContent = 'Acceso Coordinador Contratista';
+      else if (rol === 'LUZ_DEL_SUR') titulo.textContent = 'Acceso Inspector Luz del Sur';
+      else if (rol === 'JEFE_SECCION') titulo.textContent = 'Acceso Jefatura de Sección';
+
+      modal.classList.remove('hidden');
+      input.focus();
+    }
+
+    function cerrarLogin() {
+      document.getElementById('modal-login').classList.add('hidden');
+    }
+
+    function verificarLogin() {
+      const pin = document.getElementById('input-pin').value.trim();
+      const claveCorrecta = CLAVES[rolSeleccionado];
+
+      if (pin === claveCorrecta) {
+        rolLogueado = rolSeleccionado;
+        cerrarLogin();
+        
+        if (rolLogueado === 'JEFE_SECCION') {
+          mostrarPantalla('pantalla-jefatura');
+          renderizarTablaSupervisores();
+        } else {
+          configurarPantallaDatos(rolLogueado);
+          mostrarPantalla('pantalla-datos');
+        }
+      } else {
+        document.getElementById('error-pin').classList.remove('hidden');
+      }
+    }
+
+    // Configurar Pantalla de Datos
+    function configurarPantallaDatos(rol) {
+      const secContratista = document.getElementById('seccion-subcontratista');
+      const badge = document.getElementById('badge-rol-actual');
+
+      if (rol === 'CAPATAZ') {
+        secContratista.classList.remove('hidden');
+        badge.className = 'px-3.5 py-1.5 rounded-full text-xs font-black uppercase tracking-wider bg-amberBrand-100 text-amberBrand-700 border border-amberBrand-300';
+        badge.textContent = 'Capataz Contratista';
+      } else if (rol === 'COORD_CONTRATISTA') {
+        secContratista.classList.remove('hidden');
+        badge.className = 'px-3.5 py-1.5 rounded-full text-xs font-black uppercase tracking-wider bg-blue-100 text-tecsur-700 border border-blue-300';
+        badge.textContent = 'Coordinador Contratista';
+      } else if (rol === 'LUZ_DEL_SUR') {
+        secContratista.classList.add('hidden');
+        badge.className = 'px-3.5 py-1.5 rounded-full text-xs font-black uppercase tracking-wider bg-orange-100 text-lds-600 border border-orange-300';
+        badge.textContent = 'Cliente Luz del Sur';
+      }
+    }
+
+    function toggleOtraContratista(val) {
+      const inp = document.getElementById('input-otra-contratista');
+      if (val === 'OTRA') inp.classList.remove('hidden');
+      else inp.classList.add('hidden');
+    }
+
+    // Poblar Selector
+    function poblarSelectSupervisores(lista) {
+      const select = document.getElementById('select-supervisor');
+      select.innerHTML = '<option value="">-- Seleccione al supervisor de Tecsur --</option>';
+
+      const cr4301 = lista.filter(s => s.cr === '4301');
+      const cr4070 = lista.filter(s => s.cr === '4070');
+
+      if (cr4301.length > 0) {
+        const optgroup = document.createElement('optgroup');
+        optgroup.label = 'CR 4301 · OBRAS BAJA TENSIÓN (' + cr4301.length + ')';
+        cr4301.forEach(s => {
+          const opt = document.createElement('option');
+          opt.value = s.id;
+          opt.textContent = `${s.nombre} [${s.cargo}]`;
+          optgroup.appendChild(opt);
+        });
+        select.appendChild(optgroup);
+      }
+
+      if (cr4070.length > 0) {
+        const optgroup = document.createElement('optgroup');
+        optgroup.label = 'CR 4070 · PLANIFICACIÓN OBRAS Y MANTTO BT (' + cr4070.length + ')';
+        cr4070.forEach(s => {
+          const opt = document.createElement('option');
+          opt.value = s.id;
+          opt.textContent = `${s.nombre} [${s.cargo}]`;
+          optgroup.appendChild(opt);
+        });
+        select.appendChild(optgroup);
+      }
+    }
+
+    function filtrarSupervisores(filtro) {
+      ['filtro-cr-todos', 'filtro-cr-4301', 'filtro-cr-4070'].forEach(id => {
+        const b = document.getElementById(id);
+        b.className = 'px-3 py-1 text-xs rounded-xl font-bold bg-slate-100 text-slate-700 hover:bg-slate-200';
+      });
+
+      if (filtro === 'TODOS') {
+        document.getElementById('filtro-cr-todos').className = 'px-3 py-1 text-xs rounded-xl font-bold bg-slate-900 text-white shadow-sm';
+        poblarSelectSupervisores(SUPERVISORES);
+      } else {
+        document.getElementById('filtro-cr-' + filtro).className = 'px-3 py-1 text-xs rounded-xl font-bold bg-slate-900 text-white shadow-sm';
+        poblarSelectSupervisores(SUPERVISORES.filter(s => s.cr === filtro));
+      }
+    }
+
+    function irACuestionario() {
+      const supId = document.getElementById('select-supervisor').value;
+      if (!supId) {
+        alert('Por favor, seleccione el supervisor a evaluar.');
+        return;
+      }
+
+      if (rolLogueado !== 'LUZ_DEL_SUR') {
+        const contratista = document.getElementById('select-subcontratista').value;
+        if (!contratista) {
+          alert('Por favor, seleccione la empresa subcontratista.');
+          return;
+        }
+      }
+
+      supervisorSeleccionado = SUPERVISORES.find(s => s.id === supId);
+      iniciarCuestionarioSupervisor(supervisorSeleccionado, rolLogueado);
+    }
+
+    // Iniciar Cuestionario (Sirve tanto para externos como para el Jefe de Sección)
+    function iniciarCuestionarioSupervisor(sup, rol) {
+      supervisorSeleccionado = sup;
+      rolLogueado = rol;
+      respuestasActuales = {};
+
+      if (rol === 'JEFE_SECCION') {
+        const historial = JSON.parse(localStorage.getItem('evaluaciones_20_20') || '[]');
+        const prevJefe = historial.find(h => h.supervisorId === sup.id && h.rol === 'JEFE_SECCION');
+        if (prevJefe && prevJefe.respuestas) {
+          respuestasActuales = { ...prevJefe.respuestas };
+        }
+      }
+
+      document.getElementById('resumen-nombre-supervisor').textContent = sup.nombre;
+      document.getElementById('resumen-cr-supervisor').textContent = `${sup.cargo} · CR ${sup.cr} (${sup.crDesc})`;
+      
+      const sub = document.getElementById('subtitulo-rol-cuestionario');
+      if (rol === 'JEFE_SECCION') {
+        sub.textContent = 'EVALUACIÓN FORMAL DE JEFATURA · 20 COMPORTAMIENTOS OBSERVABLES';
+      } else if (rol === 'CAPATAZ') {
+        sub.textContent = 'EVALUACIÓN DE CAMPO · CAPATAZ CONTRATISTA';
+      } else if (rol === 'COORD_CONTRATISTA') {
+        sub.textContent = 'EVALUACIÓN DE GESTIÓN · COORDINADOR CONTRATISTA';
+      } else if (rol === 'LUZ_DEL_SUR') {
+        sub.textContent = 'EVALUACIÓN DE CLIENTE · INSPECCIÓN LUZ DEL SUR';
+      }
+
+      renderizarPreguntas();
+      mostrarPantalla('pantalla-cuestionario');
+    }
+
+    // Renderizar Preguntas Agrupadas por Bloques
+    function renderizarPreguntas() {
+      const contenedor = document.getElementById('contenedor-preguntas');
+      contenedor.innerHTML = '';
+
+      const preguntas = COMPORTAMIENTOS.filter(c => c.roles.includes(rolLogueado));
+      const bloques = [...new Set(preguntas.map(p => p.bloque))];
+
+      bloques.forEach((nombreBloque) => {
+        const bloqueCard = document.createElement('div');
+        bloqueCard.className = 'space-y-3';
+
+        const tituloBloque = document.createElement('div');
+        tituloBloque.className = 'bg-slate-900 text-white px-4 py-2.5 rounded-2xl text-xs font-black uppercase tracking-wider flex items-center justify-between shadow';
+        tituloBloque.innerHTML = `
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-amberBrand-400"></span>
+            <span>${nombreBloque}</span>
+          </div>
+          <span class="text-[10px] text-slate-400 font-bold">Kit del Rol Tecsur</span>
+        `;
+        bloqueCard.appendChild(tituloBloque);
+
+        const preguntasBloque = preguntas.filter(p => p.bloque === nombreBloque);
+
+        preguntasBloque.forEach(c => {
+          const card = document.createElement('div');
+          card.className = 'bg-white border border-slate-200 rounded-3xl p-5 shadow-sm space-y-3';
+          card.id = `card-comp-${c.id}`;
+
+          card.innerHTML = `
+            <div class="flex items-start justify-between gap-2">
+              <span class="text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-blue-50 text-tecsur-600 border border-blue-200">
+                Comportamiento ${c.id}
+              </span>
+              <span class="text-[10px] font-bold text-slate-500 bg-slate-100 px-2.5 py-0.5 rounded-full">
+                Pilar: ${c.criterio}
+              </span>
+            </div>
+
+            <p class="text-sm font-bold text-slate-900 leading-snug">
+              ${c.desc}
+            </p>
+
+            <div class="pt-2">
+              <span class="text-[11px] font-black text-slate-400 uppercase tracking-wider block mb-2">Seleccione nivel observado:</span>
+              <div class="grid grid-cols-3 sm:grid-cols-6 gap-2">
+                <button type="button" onclick="marcarRespuesta(${c.id}, 0)" id="btn-score-${c.id}-0" class="btn-score py-2.5 px-1 text-center rounded-2xl border-2 border-slate-200 hover:border-rose-400 text-xs font-black transition flex flex-col items-center">
+                  <span class="text-sm font-black">0</span>
+                  <span class="text-[9px] font-medium text-slate-500">Ausente</span>
+                </button>
+                <button type="button" onclick="marcarRespuesta(${c.id}, 50)" id="btn-score-${c.id}-50" class="btn-score py-2.5 px-1 text-center rounded-2xl border-2 border-slate-200 hover:border-amber-400 text-xs font-black transition flex flex-col items-center">
+                  <span class="text-sm font-black">50</span>
+                  <span class="text-[9px] font-medium text-slate-500">Irregular</span>
+                </button>
+                <button type="button" onclick="marcarRespuesta(${c.id}, 75)" id="btn-score-${c.id}-75" class="btn-score py-2.5 px-1 text-center rounded-2xl border-2 border-slate-200 hover:border-blue-400 text-xs font-black transition flex flex-col items-center">
+                  <span class="text-sm font-black">75</span>
+                  <span class="text-[9px] font-medium text-slate-500">En parte</span>
+                </button>
+                <button type="button" onclick="marcarRespuesta(${c.id}, 100)" id="btn-score-${c.id}-100" class="btn-score py-2.5 px-1 text-center rounded-2xl border-2 border-slate-200 hover:border-emerald-500 text-xs font-black transition flex flex-col items-center">
+                  <span class="text-sm font-black">100</span>
+                  <span class="text-[9px] font-medium text-slate-500">Conforme</span>
+                </button>
+                <button type="button" onclick="marcarRespuesta(${c.id}, 120)" id="btn-score-${c.id}-120" class="btn-score py-2.5 px-1 text-center rounded-2xl border-2 border-slate-200 hover:border-indigo-500 text-xs font-black transition flex flex-col items-center">
+                  <span class="text-sm font-black">120</span>
+                  <span class="text-[9px] font-medium text-slate-500">Sostenido</span>
+                </button>
+                <button type="button" onclick="marcarRespuesta(${c.id}, -1)" id="btn-score-${c.id}--1" class="btn-score py-2.5 px-1 text-center rounded-2xl border-2 border-slate-200 hover:border-slate-400 text-xs font-black transition flex flex-col items-center bg-slate-50">
+                  <span class="text-sm font-black text-slate-400">N/A</span>
+                  <span class="text-[9px] font-medium text-slate-400">No aplica</span>
+                </button>
+              </div>
+            </div>
+          `;
+          bloqueCard.appendChild(card);
+        });
+
+        contenedor.appendChild(bloqueCard);
+      });
+
+      // Precargar respuestas previas
+      Object.keys(respuestasActuales).forEach(id => {
+        marcarEstiloBoton(id, respuestasActuales[id]);
+      });
+
+      actualizarProgreso(Object.keys(respuestasActuales).length, preguntas.length);
+      lucide.createIcons();
+    }
+
+    function marcarRespuesta(compId, puntaje) {
+      respuestasActuales[compId] = puntaje;
+      marcarEstiloBoton(compId, puntaje);
+      const totalPreguntas = COMPORTAMIENTOS.filter(c => c.roles.includes(rolLogueado)).length;
+      actualizarProgreso(Object.keys(respuestasActuales).length, totalPreguntas);
+    }
+
+    function marcarEstiloBoton(compId, puntaje) {
+      [-1, 0, 50, 75, 100, 120].forEach(val => {
+        const btn = document.getElementById(`btn-score-${compId}-${val}`);
+        if (!btn) return;
+        btn.classList.remove('bg-rose-500', 'bg-amber-500', 'bg-blue-600', 'bg-emerald-600', 'bg-indigo-600', 'bg-slate-700', 'text-white', 'border-transparent', 'shadow-md');
+        btn.classList.add('border-slate-200');
+      });
+
+      const btnActivo = document.getElementById(`btn-score-${compId}-${puntaje}`);
+      if (!btnActivo) return;
+      btnActivo.classList.remove('border-slate-200');
+      btnActivo.classList.add('text-white', 'border-transparent', 'shadow-md');
+
+      if (puntaje === 0) btnActivo.classList.add('bg-rose-500');
+      else if (puntaje === 50) btnActivo.classList.add('bg-amber-500');
+      else if (puntaje === 75) btnActivo.classList.add('bg-blue-600');
+      else if (puntaje === 100) btnActivo.classList.add('bg-emerald-600');
+      else if (puntaje === 120) btnActivo.classList.add('bg-indigo-600');
+      else if (puntaje === -1) btnActivo.classList.add('bg-slate-700');
+    }
+
+    function actualizarProgreso(respondidas, total) {
+      document.getElementById('indicador-progreso').textContent = `${respondidas} / ${total} respondidas`;
+      const pct = total > 0 ? Math.round((respondidas / total) * 100) : 0;
+      const bar = document.getElementById('barra-progreso-fill');
+      if (bar) bar.style.width = pct + '%';
+    }
+
+    // Enviar Evaluación y Guardar
+    function enviarEvaluacion() {
+      const preguntas = COMPORTAMIENTOS.filter(c => c.roles.includes(rolLogueado));
+      const respondidasCount = Object.keys(respuestasActuales).length;
+
+      if (respondidasCount < preguntas.length) {
+        if (!confirm(`Has respondido ${respondidasCount} de ${preguntas.length} comportamientos. ¿Deseas guardar la evaluación de todas formas?`)) {
+          return;
+        }
+      }
+
+      const registro = {
+        id: 'eval-' + Date.now(),
+        fecha: new Date().toISOString(),
+        rol: rolLogueado,
+        supervisorId: supervisorSeleccionado.id,
+        supervisorNombre: supervisorSeleccionado.nombre,
+        contratista: (rolLogueado === 'JEFE_SECCION' || rolLogueado === 'LUZ_DEL_SUR') ? 'N/A' : (document.getElementById('select-subcontratista').value || 'Contratista'),
+        evaluador: (rolLogueado === 'JEFE_SECCION') ? 'Jefe de Sección' : (document.getElementById('input-nombre-evaluador').value.trim() || 'Anónimo'),
+        proyecto: (rolLogueado === 'JEFE_SECCION') ? 'General' : (document.getElementById('input-proyecto').value.trim() || 'General'),
+        respuestas: respuestasActuales
+      };
+
+      let historial = JSON.parse(localStorage.getItem('evaluaciones_20_20') || '[]');
+      
+      if (rolLogueado === 'JEFE_SECCION') {
+        historial = historial.filter(h => !(h.supervisorId === supervisorSeleccionado.id && h.rol === 'JEFE_SECCION'));
+      }
+
+      historial.push(registro);
+      localStorage.setItem('evaluaciones_20_20', JSON.stringify(historial));
+
+      actualizarEstadisticasJefatura();
+
+      if (rolLogueado === 'JEFE_SECCION') {
+        mostrarPantalla('pantalla-jefatura');
+        renderizarTablaSupervisores();
+        alert(`¡Evaluación de los 20 comportamientos guardada exitosamente para ${supervisorSeleccionado.nombre}!`);
+      } else {
+        mostrarPantalla('pantalla-exito');
+      }
+    }
+
+    // Estadísticas y Cálculo de KPIs en Vivo
+    function actualizarEstadisticasJefatura() {
+      const historial = JSON.parse(localStorage.getItem('evaluaciones_20_20') || '[]');
+      const kpisDuros = JSON.parse(localStorage.getItem('kpis_duros_20_20') || '{}');
+
+      let jefeCount = 0;
+      let capatazCount = 0;
+      let coordCount = 0;
+      let ldsCount = 0;
+
+      historial.forEach(e => {
+        if (e.rol === 'JEFE_SECCION') jefeCount++;
+        else if (e.rol === 'CAPATAZ') capatazCount++;
+        else if (e.rol === 'COORD_CONTRATISTA') coordCount++;
+        else if (e.rol === 'LUZ_DEL_SUR') ldsCount++;
+      });
+
+      const statJefe = document.getElementById('stat-jefe');
+      const statCap = document.getElementById('stat-capataz');
+      const statCoord = document.getElementById('stat-coord');
+      const statLDS = document.getElementById('stat-lds');
+
+      if (statJefe) statJefe.textContent = jefeCount;
+      if (statCap) statCap.textContent = capatazCount;
+      if (statCoord) statCoord.textContent = coordCount;
+      if (statLDS) statLDS.textContent = ldsCount;
+
+      // 1. Cálculo del Promedio Global y Distribución de Semáforos
+      let countAzul = 0, countVerde = 0, countAmarillo = 0, countRojo = 0;
+      let sumaNotasGlobal = 0, cantidadConNota = 0;
+      let sumJefe = 0, countJefe = 0;
+      let sumExt = 0, countExt = 0;
+
+      let pilares = {
+        SEGURIDAD: { suma: 0, count: 0 },
+        OBJETIVOS: { suma: 0, count: 0 },
+        CALIDAD: { suma: 0, count: 0 },
+        HABILIDADES_BLANDAS: { suma: 0, count: 0 }
+      };
+
+      SUPERVISORES.forEach(s => {
+        const evalsSup = historial.filter(h => h.supervisorId === s.id);
+        const evalJefe = evalsSup.find(h => h.rol === 'JEFE_SECCION');
+        const evalExt = evalsSup.filter(h => h.rol !== 'JEFE_SECCION');
+
+        let promSup = null;
+        if (evalJefe) {
+          let sJ = 0, cJ = 0;
+          Object.values(evalJefe.respuestas).forEach(v => { if (v >= 0) { sJ += v; cJ++; } });
+          if (cJ > 0) {
+            promSup = Math.round(sJ / cJ);
+            sumJefe += promSup;
+            countJefe++;
+          }
+        }
+
+        if (evalExt.length > 0) {
+          let sE = 0, cE = 0;
+          evalExt.forEach(ev => {
+            Object.values(ev.respuestas).forEach(v => { if (v >= 0) { sE += v; cE++; } });
+          });
+          if (cE > 0) {
+            const pE = Math.round(sE / cE);
+            sumExt += pE;
+            countExt++;
+            if (promSup === null) promSup = pE;
+          }
+        }
+
+        if (promSup !== null) {
+          sumaNotasGlobal += promSup;
+          cantidadConNota++;
+          if (promSup >= 110) countAzul++;
+          else if (promSup >= 95) countVerde++;
+          else if (promSup >= 75) countAmarillo++;
+          else countRojo++;
+        }
+      });
+
+      historial.forEach(ev => {
+        Object.keys(ev.respuestas).forEach(cId => {
+          const val = ev.respuestas[cId];
+          if (val >= 0) {
+            const comp = COMPORTAMIENTOS.find(c => c.id == cId);
+            if (comp && pilares[comp.criterio]) {
+              pilares[comp.criterio].suma += val;
+              pilares[comp.criterio].count++;
+            }
+          }
+        });
+      });
+
+      let sumaAvance = 0, countAvance = 0;
+      let totalIncidentes = 0;
+      let totalNoConform = 0;
+
+      Object.values(kpisDuros).forEach(k => {
+        if (k.objetivos) { sumaAvance += parseFloat(k.objetivos); countAvance++; }
+        if (k.seguridad) { totalIncidentes += parseInt(k.seguridad) || 0; }
+        if (k.calidad) { totalNoConform += parseInt(k.calidad) || 0; }
+      });
+
+      const elemPromGlobal = document.getElementById('kpi-promedio-global');
+      const elemBadgeGlobal = document.getElementById('kpi-badge-global');
+      if (elemPromGlobal) {
+        if (cantidadConNota > 0) {
+          const promG = Math.round(sumaNotasGlobal / cantidadConNota);
+          elemPromGlobal.textContent = promG;
+          if (promG >= 110) elemBadgeGlobal.innerHTML = '<span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-indigo-100 text-indigo-800 uppercase tracking-wider">🔵 Sostenido</span>';
+          else if (promG >= 95) elemBadgeGlobal.innerHTML = '<span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-emerald-100 text-emerald-800 uppercase tracking-wider">🟢 Conforme</span>';
+          else if (promG >= 75) elemBadgeGlobal.innerHTML = '<span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-amber-100 text-amber-800 uppercase tracking-wider">🟡 En Parte</span>';
+          else elemBadgeGlobal.innerHTML = '<span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-rose-100 text-rose-800 uppercase tracking-wider">🔴 Crítico</span>';
+        } else {
+          elemPromGlobal.textContent = '-';
+          elemBadgeGlobal.innerHTML = '<span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-slate-100 text-slate-500 uppercase tracking-wider">Sin evaluaciones</span>';
+        }
+      }
+
+      if (document.getElementById('kpi-count-azul')) document.getElementById('kpi-count-azul').textContent = countAzul;
+      if (document.getElementById('kpi-count-verde')) document.getElementById('kpi-count-verde').textContent = countVerde;
+      if (document.getElementById('kpi-count-amarillo')) document.getElementById('kpi-count-amarillo').textContent = countAmarillo;
+      if (document.getElementById('kpi-count-rojo')) document.getElementById('kpi-count-rojo').textContent = countRojo;
+
+      const elemBrechaVal = document.getElementById('kpi-brecha-valor');
+      const elemBrechaEst = document.getElementById('kpi-brecha-estado');
+      const elemBrechaDesc = document.getElementById('kpi-brecha-desc');
+      if (elemBrechaVal) {
+        if (countJefe > 0 && countExt > 0) {
+          const promJ = Math.round(sumJefe / countJefe);
+          const promE = Math.round(sumExt / countExt);
+          const diff = promJ - promE;
+          elemBrechaVal.textContent = (diff > 0 ? `+${diff}` : `${diff}`) + ' pts';
+          if (Math.abs(diff) <= 10) {
+            elemBrechaEst.textContent = 'Alineado';
+            elemBrechaEst.className = 'text-xs font-black text-emerald-700 bg-emerald-100 px-2.5 py-0.5 rounded-full uppercase tracking-wider';
+            elemBrechaDesc.textContent = `Consenso alto: Jefatura (${promJ} pts) y Campo/LDS (${promE} pts) coinciden en el nivel observado.`;
+          } else if (diff > 10) {
+            elemBrechaEst.textContent = 'Sobreestimado';
+            elemBrechaEst.className = 'text-xs font-black text-amber-700 bg-amber-100 px-2.5 py-0.5 rounded-full uppercase tracking-wider';
+            elemBrechaDesc.textContent = `Jefatura (${promJ} pts) califica más alto que Campo/LDS (${promE} pts). Revisar frentes reales.`;
+          } else {
+            elemBrechaEst.textContent = 'Fortaleza Externa';
+            elemBrechaEst.className = 'text-xs font-black text-blue-700 bg-blue-100 px-2.5 py-0.5 rounded-full uppercase tracking-wider';
+            elemBrechaDesc.textContent = `Luz del Sur y Contratistas valoran al equipo (${promE} pts) por encima de Jefatura (${promJ} pts).`;
+          }
+        } else {
+          elemBrechaVal.textContent = '0 pts';
+          elemBrechaEst.textContent = 'Pendiente';
+          elemBrechaDesc.textContent = 'Se requiere al menos 1 evaluación de Jefatura y 1 externa para calcular la brecha.';
+        }
+      }
+
+      const calcPilar = (key) => pilares[key].count > 0 ? Math.round(pilares[key].suma / pilares[key].count) + ' pts' : '- pts';
+      if (document.getElementById('kpi-pilar-seg-nota')) document.getElementById('kpi-pilar-seg-nota').textContent = calcPilar('SEGURIDAD');
+      if (document.getElementById('kpi-pilar-seg-dura')) document.getElementById('kpi-pilar-seg-dura').textContent = `${totalIncidentes} incidentes`;
+
+      if (document.getElementById('kpi-pilar-obj-nota')) document.getElementById('kpi-pilar-obj-nota').textContent = calcPilar('OBJETIVOS');
+      if (document.getElementById('kpi-pilar-obj-dura')) document.getElementById('kpi-pilar-obj-dura').textContent = countAvance > 0 ? `Avance: ${Math.round(sumaAvance / countAvance)}%` : 'Avance: - %';
+
+      if (document.getElementById('kpi-pilar-cal-nota')) document.getElementById('kpi-pilar-cal-nota').textContent = calcPilar('CALIDAD');
+      if (document.getElementById('kpi-pilar-cal-dura')) document.getElementById('kpi-pilar-cal-dura').textContent = `${totalNoConform} no conform.`;
+
+      if (document.getElementById('kpi-pilar-bla-nota')) document.getElementById('kpi-pilar-bla-nota').textContent = calcPilar('HABILIDADES_BLANDAS');
+    }
+
+    // Tabla del Jefe de Sección
+    function renderizarTablaSupervisores(filtroNombre = '') {
+      const tbody = document.getElementById('tabla-supervisores-cuerpo');
+      tbody.innerHTML = '';
+      const historial = JSON.parse(localStorage.getItem('evaluaciones_20_20') || '[]');
+      const kpisDuros = JSON.parse(localStorage.getItem('kpis_duros_20_20') || '{}');
+
+      const lista = SUPERVISORES.filter(s => 
+        s.nombre.toLowerCase().includes(filtroNombre.toLowerCase()) || 
+        s.cr.includes(filtroNombre)
+      );
+
+      lista.forEach(s => {
+        const evalsSup = historial.filter(h => h.supervisorId === s.id);
+        const evalJefe = evalsSup.find(h => h.rol === 'JEFE_SECCION');
+        const evalCapataz = evalsSup.find(h => h.rol === 'CAPATAZ');
+        const evalCoord = evalsSup.find(h => h.rol === 'COORD_CONTRATISTA');
+        const evalLDS = evalsSup.find(h => h.rol === 'LUZ_DEL_SUR');
+        const kpi = kpisDuros[s.id];
+
+        let promJefe = null;
+        if (evalJefe) {
+          let sum = 0, count = 0;
+          Object.values(evalJefe.respuestas).forEach(v => {
+            if (v >= 0) { sum += v; count++; }
+          });
+          if (count > 0) promJefe = Math.round(sum / count);
+        }
+
+        let promExternos = null;
+        let sumExt = 0, countExt = 0;
+        evalsSup.filter(e => e.rol !== 'JEFE_SECCION').forEach(ev => {
+          Object.values(ev.respuestas).forEach(v => {
+            if (v >= 0) { sumExt += v; countExt++; }
+          });
+        });
+        if (countExt > 0) promExternos = Math.round(sumExt / countExt);
+
+        const notaReferencia = promJefe !== null ? promJefe : promExternos;
+        let semaforoBadge = '<span class="text-slate-400 font-semibold text-[11px]">Sin evaluar</span>';
+
+        if (notaReferencia !== null) {
+          if (notaReferencia >= 110) {
+            semaforoBadge = `<span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-indigo-100 text-indigo-800 uppercase tracking-wider">🔵 Sostenido (${notaReferencia})</span>`;
+          } else if (notaReferencia >= 95) {
+            semaforoBadge = `<span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-emerald-100 text-emerald-800 uppercase tracking-wider">🟢 Conforme (${notaReferencia})</span>`;
+          } else if (notaReferencia >= 75) {
+            semaforoBadge = `<span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-amber-100 text-amber-800 uppercase tracking-wider">🟡 En parte (${notaReferencia})</span>`;
+          } else {
+            semaforoBadge = `<span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-rose-100 text-rose-800 uppercase tracking-wider">🔴 Crítico (${notaReferencia})</span>`;
+          }
+        }
+
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-slate-50 transition border-b border-slate-100';
+        tr.innerHTML = `
+          <td class="p-3.5 font-bold text-slate-900">${s.nombre}</td>
+          <td class="p-3.5"><span class="px-2 py-0.5 rounded-md bg-slate-100 font-mono text-[10px] font-black text-slate-700">${s.cr}</span></td>
+          <td class="p-3.5"><span class="badge-cargo bg-blue-50 text-tecsur-600 border border-blue-200">${s.cargo}</span></td>
+          
+          <td class="p-3.5 text-center">
+            ${promJefe !== null 
+              ? `<div class="flex flex-col items-center">
+                   <span class="font-black text-tecsur-700 text-sm">${promJefe} pts</span>
+                   <button onclick="evaluarSupervisorDesdeJefatura('${s.id}')" class="text-[10px] font-bold text-tecsur-600 hover:underline">Editar 20 Comps</button>
+                 </div>`
+              : `<button onclick="evaluarSupervisorDesdeJefatura('${s.id}')" class="px-3 py-1.5 bg-tecsur-600 text-white rounded-xl text-[11px] font-black hover:bg-tecsur-500 transition shadow-sm">
+                   📝 Evaluar 20 Comps
+                 </button>`
+            }
+          </td>
+
+          <td class="p-3.5 text-center">
+            <div class="flex justify-center gap-1.5 text-[10px]">
+              <span title="Capataz" class="px-2 py-0.5 rounded-md ${evalCapataz ? 'bg-amberBrand-100 text-amberBrand-800 font-black' : 'bg-slate-100 text-slate-400 font-medium'}">Cap</span>
+              <span title="Coord Contratista" class="px-2 py-0.5 rounded-md ${evalCoord ? 'bg-cyan-100 text-cyan-800 font-black' : 'bg-slate-100 text-slate-400 font-medium'}">Coord</span>
+              <span title="Luz del Sur" class="px-2 py-0.5 rounded-md ${evalLDS ? 'bg-orange-100 text-lds-600 font-black' : 'bg-slate-100 text-slate-400 font-medium'}">LDS</span>
+            </div>
+            ${promExternos !== null ? `<span class="text-[10px] text-slate-500 mt-1 block font-bold">Prom: ${promExternos} pts</span>` : ''}
+          </td>
+
+          <td class="p-3.5 text-center">
+            ${kpi 
+              ? `<div class="text-[10px] text-slate-700 font-semibold space-y-0.5">
+                   <span>Obj: <strong class="text-slate-900">${kpi.objetivos || '0'}%</strong></span> · 
+                   <span>Seg: <strong class="text-slate-900">${kpi.seguridad || '0'}</strong></span> · 
+                   <span>Cal: <strong class="text-slate-900">${kpi.calidad || '0'}</strong></span>
+                   <button onclick="abrirModalDataDura('${s.id}')" class="text-[9px] text-tecsur-600 font-bold hover:underline block mx-auto">Editar</button>
+                 </div>`
+              : `<button onclick="abrirModalDataDura('${s.id}')" class="px-2.5 py-1 border border-slate-300 rounded-xl text-[10px] font-bold text-slate-700 hover:bg-slate-100">
+                   + Cargar KPIs
+                 </button>`
+            }
+          </td>
+
+          <td class="p-3.5 text-center">${semaforoBadge}</td>
+
+          <td class="p-3.5 text-right">
+            <button onclick="abrirFicha360('${s.id}')" class="px-3 py-1.5 bg-slate-900 text-white rounded-xl text-[11px] font-black hover:bg-slate-800 transition flex items-center gap-1.5 ml-auto shadow">
+              <i data-lucide="eye" class="w-3.5 h-3.5 text-amberBrand-400"></i>
+              <span>Ficha 360°</span>
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+      lucide.createIcons();
+    }
+
+    function filtrarTablaSupervisores(query) {
+      renderizarTablaSupervisores(query);
+    }
+
+    function evaluarSupervisorDesdeJefatura(supId) {
+      const sup = SUPERVISORES.find(s => s.id === supId);
+      iniciarCuestionarioSupervisor(sup, 'JEFE_SECCION');
+    }
+
+    // Modal de Data Dura
+    function abrirModalDataDura(supId) {
+      supervisorDataDuraModal = SUPERVISORES.find(s => s.id === supId);
+      document.getElementById('modal-dura-supervisor').textContent = supervisorDataDuraModal.nombre;
+      
+      const kpisDuros = JSON.parse(localStorage.getItem('kpis_duros_20_20') || '{}');
+      const dataExistente = kpisDuros[supId] || {};
+
+      document.getElementById('input-kpi-objetivos').value = dataExistente.objetivos || '';
+      document.getElementById('input-kpi-seguridad').value = dataExistente.seguridad || '';
+      document.getElementById('input-kpi-calidad').value = dataExistente.calidad || '';
+
+      document.getElementById('modal-data-dura').classList.remove('hidden');
+    }
+
+    function cerrarModalDataDura() {
+      document.getElementById('modal-data-dura').classList.add('hidden');
+    }
+
+    function guardarDataDura() {
+      const kpisDuros = JSON.parse(localStorage.getItem('kpis_duros_20_20') || '{}');
+      kpisDuros[supervisorDataDuraModal.id] = {
+        objetivos: document.getElementById('input-kpi-objetivos').value,
+        seguridad: document.getElementById('input-kpi-seguridad').value,
+        calidad: document.getElementById('input-kpi-calidad').value,
+        fecha: new Date().toISOString()
+      };
+      localStorage.setItem('kpis_duros_20_20', JSON.stringify(kpisDuros));
+      cerrarModalDataDura();
+      actualizarEstadisticasJefatura();
+      renderizarTablaSupervisores();
+    }
+
+    // Ficha Ejecutiva 360°
+    function abrirFicha360(supId) {
+      const sup = SUPERVISORES.find(s => s.id === supId);
+      const historial = JSON.parse(localStorage.getItem('evaluaciones_20_20') || '[]');
+      const kpisDuros = JSON.parse(localStorage.getItem('kpis_duros_20_20') || '{}');
+
+      const evalsSup = historial.filter(h => h.supervisorId === sup.id);
+      const evalJefe = evalsSup.find(h => h.rol === 'JEFE_SECCION');
+      const evalCapataz = evalsSup.find(h => h.rol === 'CAPATAZ');
+      const evalCoord = evalsSup.find(h => h.rol === 'COORD_CONTRATISTA');
+      const evalLDS = evalsSup.find(h => h.rol === 'LUZ_DEL_SUR');
+      const kpi = kpisDuros[sup.id];
+
+      document.getElementById('ficha-nombre-sup').textContent = sup.nombre;
+      document.getElementById('ficha-detalle-sup').textContent = `${sup.cargo} · CR ${sup.cr} (${sup.crDesc})`;
+
+      const calcPromedio = (ev) => {
+        if (!ev) return null;
+        let sum = 0, count = 0;
+        Object.values(ev.respuestas).forEach(v => {
+          if (v >= 0) { sum += v; count++; }
+        });
+        return count > 0 ? Math.round(sum / count) : null;
+      };
+
+      const pJefe = calcPromedio(evalJefe);
+      const pCap = calcPromedio(evalCapataz);
+      const pCoord = calcPromedio(evalCoord);
+      const pLDS = calcPromedio(evalLDS);
+
+      document.getElementById('ficha-score-jefe').textContent = pJefe !== null ? `${pJefe} pts` : '-';
+      document.getElementById('ficha-score-capataz').textContent = pCap !== null ? `${pCap} pts` : '-';
+      document.getElementById('ficha-score-coord').textContent = pCoord !== null ? `${pCoord} pts` : '-';
+      document.getElementById('ficha-score-lds').textContent = pLDS !== null ? `${pLDS} pts` : '-';
+
+      const boxBrecha = document.getElementById('ficha-box-brecha');
+      let extArray = [pCap, pCoord, pLDS].filter(x => x !== null);
+      let promExt = extArray.length > 0 ? Math.round(extArray.reduce((a,b)=>a+b,0) / extArray.length) : null;
+
+      if (pJefe !== null && promExt !== null) {
+        const brecha = pJefe - promExt;
+        if (Math.abs(brecha) <= 10) {
+          boxBrecha.className = 'p-4 rounded-2xl border bg-emerald-50 border-emerald-200 text-emerald-950 text-xs shadow-sm';
+          boxBrecha.innerHTML = `<strong class="text-emerald-800 text-sm block mb-1">Alineación Alta (${brecha > 0 ? `+${brecha}` : brecha} pts):</strong> Existe consenso entre la Jefatura (${pJefe} pts) y la visión de campo (${promExt} pts). La percepción de desempeño es sólida y compartida.`;
+        } else if (brecha > 10) {
+          boxBrecha.className = 'p-4 rounded-2xl border bg-amber-50 border-amber-200 text-amber-950 text-xs shadow-sm';
+          boxBrecha.innerHTML = `<strong class="text-amber-800 text-sm block mb-1">Brecha de Percepción (+${brecha} pts):</strong> La Jefatura califica con ${pJefe} pts, pero en campo (Capataz/LDS) lo evalúan con ${promExt} pts. <em>Recomendación Tecsur:</em> Aplicar el Comp. 6 del Jefe de Sección (observar directamente en campo las condiciones reales).`;
+        } else {
+          boxBrecha.className = 'p-4 rounded-2xl border bg-blue-50 border-blue-200 text-blue-950 text-xs shadow-sm';
+          boxBrecha.innerHTML = `<strong class="text-blue-800 text-sm block mb-1">Fortaleza Externa (${brecha} pts):</strong> Los actores externos (LDS/Contratistas) valoran al supervisor (${promExt} pts) por encima de la nota de Jefatura (${pJefe} pts). Excelente reconocimiento de los clientes.`;
+        }
+      } else {
+        boxBrecha.className = 'p-4 rounded-2xl border bg-slate-50 border-slate-200 text-slate-600 text-xs';
+        boxBrecha.innerHTML = `<em>Pendiente de completar evaluaciones externas y de jefatura para calcular la brecha conductual 360°.</em>`;
+      }
+
+      document.getElementById('ficha-kpi-obj').textContent = kpi && kpi.objetivos ? `${kpi.objetivos}%` : 'No registrado';
+      document.getElementById('ficha-kpi-seg').textContent = kpi && kpi.seguridad !== undefined ? `${kpi.seguridad} incidentes` : 'No registrado';
+      document.getElementById('ficha-kpi-cal').textContent = kpi && kpi.calidad !== undefined ? `${kpi.calidad} obs` : 'No registrado';
+
+      document.getElementById('modal-ficha-360').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function cerrarFicha360() {
+      document.getElementById('modal-ficha-360').classList.add('hidden');
+    }
+
+    // Exportar Libro Excel Nativo (.xlsx) con Múltiples Hojas usando SheetJS
+    function exportarExcelCompletoXLSX() {
+      if (typeof XLSX === 'undefined') {
+        alert('Cargando librería de Excel, por favor intente en unos segundos.');
+        return;
+      }
+
+      const historial = JSON.parse(localStorage.getItem('evaluaciones_20_20') || '[]');
+      const kpisDuros = JSON.parse(localStorage.getItem('kpis_duros_20_20') || '{}');
+
+      const wb = XLSX.utils.book_new();
+
+      const datosScorecard = SUPERVISORES.map(s => {
+        const evalsSup = historial.filter(h => h.supervisorId === s.id);
+        const evalJefe = evalsSup.find(h => h.rol === 'JEFE_SECCION');
+        const evalCap = evalsSup.find(h => h.rol === 'CAPATAZ');
+        const evalCoord = evalsSup.find(h => h.rol === 'COORD_CONTRATISTA');
+        const evalLDS = evalsSup.find(h => h.rol === 'LUZ_DEL_SUR');
+        const kpi = kpisDuros[s.id] || {};
+
+        const calcProm = (ev) => {
+          if (!ev) return null;
+          let sum = 0, count = 0;
+          Object.values(ev.respuestas).forEach(v => { if (v >= 0) { sum += v; count++; } });
+          return count > 0 ? Math.round(sum / count) : null;
+        };
+
+        const pJefe = calcProm(evalJefe);
+        const pCap = calcProm(evalCap);
+        const pCoord = calcProm(evalCoord);
+        const pLDS = calcProm(evalLDS);
+
+        const ref = pJefe !== null ? pJefe : (pCap !== null ? pCap : null);
+        let semaforo = 'Sin evaluar';
+        if (ref !== null) {
+          if (ref >= 110) semaforo = '🔵 Sostenido';
+          else if (ref >= 95) semaforo = '🟢 Conforme';
+          else if (ref >= 75) semaforo = '🟡 En parte';
+          else semaforo = '🔴 Crítico';
+        }
+
+        return {
+          'Supervisor': s.nombre,
+          'Centro de Rendimiento': s.cr,
+          'Unidad / Descripción': s.crDesc,
+          'Cargo Escalera': s.cargo,
+          'Puntaje Jefatura (20 Comps)': pJefe !== null ? pJefe : 'Pendiente',
+          'Puntaje Capataz': pCap !== null ? pCap : '-',
+          'Puntaje Coord Contratista': pCoord !== null ? pCoord : '-',
+          'Puntaje Luz del Sur': pLDS !== null ? pLDS : '-',
+          'KPI Avance Objetivos (%)': kpi.objetivos ? `${kpi.objetivos}%` : '-',
+          'KPI Incidentes Seguridad': kpi.seguridad !== undefined ? kpi.seguridad : '-',
+          'KPI No Conformidades Calidad': kpi.calidad !== undefined ? kpi.calidad : '-',
+          'Semáforo Final': semaforo
+        };
+      });
+
+      const wsScorecard = XLSX.utils.json_to_sheet(datosScorecard);
+      XLSX.utils.book_append_sheet(wb, wsScorecard, 'Scorecard_Supervisores');
+
+      const datosDataCruda = [];
+      historial.forEach(ev => {
+        const sup = SUPERVISORES.find(s => s.id === ev.supervisorId) || { nombre: ev.supervisorNombre, cr: '-', cargo: '-', crDesc: '-' };
+        
+        Object.keys(ev.respuestas).forEach(compId => {
+          const val = ev.respuestas[compId];
+          const comp = COMPORTAMIENTOS.find(c => c.id == compId) || { bloque: '-', criterio: '-', desc: '-' };
+          
+          let desc = 'No observado';
+          if (val === 0) desc = 'Ausente';
+          else if (val === 50) desc = 'Irregular';
+          else if (val === 75) desc = 'Conforme en parte';
+          else if (val === 100) desc = 'Conforme';
+          else if (val === 120) desc = 'Sostenido';
+
+          datosDataCruda.push({
+            'ID Evaluación': ev.id,
+            'Fecha y Hora': ev.fecha,
+            'Rol Evaluador': ev.rol,
+            'Subcontratista': ev.contratista || 'N/A',
+            'Nombre Evaluador': ev.evaluador || 'Anónimo',
+            'Proyecto / SST': ev.proyecto || 'General',
+            'Supervisor': sup.nombre,
+            'CR': sup.cr,
+            'Cargo': sup.cargo,
+            'N° Comportamiento': compId,
+            'Bloque de Rutina': comp.bloque,
+            'Pilar / Criterio': comp.criterio,
+            'Puntaje': val,
+            'Descriptor Conductual': desc
+          });
+        });
+      });
+
+      if (datosDataCruda.length > 0) {
+        const wsCruda = XLSX.utils.json_to_sheet(datosDataCruda);
+        XLSX.utils.book_append_sheet(wb, wsCruda, 'Data_Cruda_Campo');
+      }
+
+      const fecha = new Date().toISOString().slice(0, 10);
+      XLSX.writeFile(wb, `evaluacion_desempeno_20_20_tecsur_${fecha}.xlsx`);
+    }
+
+    // Exportar CSV
+    function exportarDataCrudaCSV() {
+      const historial = JSON.parse(localStorage.getItem('evaluaciones_20_20') || '[]');
+      if (historial.length === 0) {
+        alert('No hay evaluaciones registradas aún para exportar.');
+        return;
+      }
+
+      const headers = [
+        'ID_Evaluacion', 'Fecha', 'Rol_Evaluador', 'Subcontratista', 'Evaluador', 'Proyecto_SST',
+        'Supervisor_Nombre', 'CR', 'Cargo', 'Comportamiento_ID', 'Bloque', 'Criterio', 'Puntaje', 'Descriptor'
+      ];
+
+      const filas = [headers.join(';')];
+
+      historial.forEach(ev => {
+        const sup = SUPERVISORES.find(s => s.id === ev.supervisorId) || { nombre: ev.supervisorNombre, cr: '-', cargo: '-' };
+        
+        Object.keys(ev.respuestas).forEach(compId => {
+          const val = ev.respuestas[compId];
+          const comp = COMPORTAMIENTOS.find(c => c.id == compId) || { bloque: '-', criterio: '-' };
+          
+          let desc = 'No aplica';
+          if (val === 0) desc = 'Ausente';
+          else if (val === 50) desc = 'Irregular';
+          else if (val === 75) desc = 'Conforme en parte';
+          else if (val === 100) desc = 'Conforme';
+          else if (val === 120) desc = 'Sostenido';
+
+          filas.push([
+            `"${ev.id}"`,
+            `"${ev.fecha}"`,
+            `"${ev.rol}"`,
+            `"${ev.contratista || 'N/A'}"`,
+            `"${ev.evaluador || 'Anónimo'}"`,
+            `"${ev.proyecto || 'General'}"`,
+            `"${sup.nombre}"`,
+            `"${sup.cr}"`,
+            `"${sup.cargo}"`,
+            compId,
+            `"${comp.bloque}"`,
+            `"${comp.criterio}"`,
+            val,
+            `"${desc}"`
+          ].join(';'));
+        });
+      });
+
+      const contenidoCSV = '\uFEFF' + filas.join('\r\n');
+      const blob = new Blob([contenidoCSV], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const enlace = document.createElement('a');
+      enlace.href = url;
+      enlace.download = `data_cruda_evaluaciones_tecsur_${new Date().toISOString().slice(0,10)}.csv`;
+      document.body.appendChild(enlace);
+      enlace.click();
+      document.body.removeChild(enlace);
+    }
+
+    function limpiarDatosPrueba() {
+      if (confirm('¿Deseas reiniciar los datos de evaluación locales?')) {
+        localStorage.removeItem('evaluaciones_20_20');
+        localStorage.removeItem('kpis_duros_20_20');
+        actualizarEstadisticasJefatura();
+        renderizarTablaSupervisores();
+      }
+    }
+  </script>
+</body>
+</html>
