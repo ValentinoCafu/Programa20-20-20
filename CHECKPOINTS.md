@@ -52,18 +52,16 @@ Este documento registra los hitos, decisiones de arquitectura y el progreso del 
 
 ---
 
-## 📌 Hito 5: Rediseño Visual e Identidad Oficial Tecsur · [COMPLETADO]
-- **Integración de Marca Oficial Tecsur:**
-  - Inclusión de las fotos reales de campo y sede institucional en `assets/`:
-    - `tecsur-logo.jpg`: Isotipo oficial en azul eléctrico.
-    - `tecsur-banner-campo.png`: Sede central de Tecsur y técnicos linieros en postes de media/baja tensión.
-    - `tecsur-sunset.jpg`: Liniero en poste al atardecer sobre la ciudad.
-  - Paleta de color oficial: Azul Eléctrico Tecsur (`#0047ba`), Amarillo/Ámbar de Seguridad (`#f59e0b`), Naranja Luz del Sur (`#ea580c`) y Azul Noche (`#071633`).
-- **Mejoras Ergonómicas de Experiencia de Usuario (UX):**
-  - **Hero Banner:** Cabecera panorámica con mensaje inspirador del Kit del Rol: *«¿El trabajo se ejecuta bien, seguro y conforme?»*.
-  - **Tarjetas de Rol Táctiles:** Tarjetas con micro-interacciones, badges de tiempo estimado (2–3 min) y colores distintivos por actor.
-  - **Barra de Progreso Dinámica:** Indicador visual animado (0% a 100%) durante la evaluación para reducir la tasa de abandono en campo.
-  - **Botones de Calificación Ergonómicos:** Botones táctiles de gran tamaño para dedos o uso en celular bajo la luz solar en campo.
-  - **Tablero de Jefatura y Excel:** Botón destacado en verde Microsoft Excel (`.xlsx`) y tarjetas analíticas de KPIs organizadas.
+## 📌 Hito 6: Despliegue en Producción y Enlace Público en Vivo · [COMPLETADO]
+- **Repositorio Oficial:** [github.com/ValentinoCafu/growthbro](https://github.com/ValentinoCafu/growthbro)
+- **Enlace Público para Pruebas (HTTPS):**
+  👉 **https://valentinocafu.github.io/growthbro/**
+- **Características Activas en el Despliegue:**
+  - Acceso multidispositivo (celulares en campo, tablets y laptops).
+  - Certificado SSL/HTTPS automático y CDN global de alta velocidad.
+  - Claves PIN activas (`CAPATAZ2026`, `COORD2026`, `LDS2026`, `JEFE2026`).
+  - Motor SheetJS cargado para exportación a Excel `.xlsx` directamente en el navegador.
+  - Tablero de KPIs en vivo y Ficha 360° operativas.
+
 
 
