@@ -59,9 +59,59 @@ Este documento registra los hitos, decisiones de arquitectura y el progreso del 
 - **Características Activas en el Despliegue:**
   - Acceso multidispositivo (celulares en campo, tablets y laptops).
   - Certificado SSL/HTTPS automático y CDN global de alta velocidad.
-  - Claves PIN activas (`CAPATAZ2026`, `COORD2026`, `LDS2026`, `JEFE2026`).
+  - Claves PIN y DNI activas.
   - Motor SheetJS cargado para exportación a Excel `.xlsx` directamente en el navegador.
   - Tablero de KPIs en vivo y Ficha 360° operativas.
+
+---
+
+## 📌 Hito 7: Homologación de las 12 Subcontratistas Oficiales · [COMPLETADO]
+- **Empresas Oficiales Incorporadas:**
+  1. ALIHCOM BUILD SAC
+  2. ALVIMAR
+  3. CAMPOS LATAM
+  4. COSORCIO CARTER RENSA
+  5. ENCOSSA SAC
+  6. EOS
+  7. GRUCOIN S.A.C.
+  8. GRUPO ACUARIUS
+  9. GRUPO ENERGIA
+  10. KIMSA
+  11. NATURAL GAS COMPANY
+  12. PRODUCSA
+  + Opción abierta para "OTRA EMPRESA (Especificar)".
+
+---
+
+## 📌 Hito 8: Esquema de Autenticación por DNI, Claves de Sección y Gobernanza Edder · [COMPLETADO]
+- **Capataces y Coordinadores de Proyecto:** Acceso mediante su número de **DNI (8 dígitos numéricos)**, garantizando trazabilidad y registro fidedigno del evaluador de campo.
+- **Proyectistas e Inspectores Luz del Sur:** Clave institucional `LDS2026`.
+- **Línea de Mando - 3 Jefaturas de Sección:**
+  - Jefe Sección 1 (CR 4301): `SECCION1`
+  - Jefe Sección 2 (CR 4301): `SECCION2`
+  - Jefe Sección 3 (CR 4070 Planificación): `SECCION3`
+  - Clave General Jefatura: `JEFE2026`
+- **Jefe de Departamento Obras BT (Edder):** Clave directiva `EDDER2026`, con acceso macro a las 3 secciones, los 24 supervisores y descarga de reportes.
+
+---
+
+## 📌 Hito 9: Redacción Conductual Adaptada al Punto de Vista de Cada Actor · [COMPLETADO]
+- Las preguntas se formulan dinámicamente según el rol logueado:
+  - **Capataz:** Enfocado en acompañamiento, verificación previa, entrega de materiales, participación en charla de 5 min, uso de EPPs y orientación técnica con buen trato.
+  - **Coordinador:** Enfocado en validación de frentes, programación de SST, movimiento de cuadrillas, gestión de permisos municipales/viales y cierre documentario/económico.
+  - **Luz del Sur:** Enfocado en contraste estricto con planos y normas LDS, verificación de documentación SST, señalización pública, presencia en momentos críticos y calidad técnica final para recepción.
+  - **Jefatura (Secciones / Edder):** Formulación directiva formal de los 20 comportamientos según el estándar corporativo Tecsur.
+
+---
+
+## 📌 Hito 10: Plantilla Excel para el Requerimiento de Matriz de Asignaciones de Edder · [COMPLETADO]
+- Botón integrado en el Portal Jefatura que genera y descarga al instante `matriz_requerimiento_asignaciones_edder_tecsur_[fecha].xlsx` con 5 hojas estructuradas para el mapeo objetivo de quién evalúa a quién:
+  1. `Supervisores_vs_JefesSec` (24 supervisores con asignación a Sección 1, 2 o 3)
+  2. `Supervisores_vs_Coord` (Mapeo de supervisor con contratista, DNI y coordinador)
+  3. `Supervisores_vs_Capataces` (Mapeo de supervisor con cuadrilla, DNI y capataz)
+  4. `Supervisores_vs_LuzDelSur` (Mapeo de supervisor con inspector y proyectista LDS)
+  5. `12_Contratistas_Oficiales` (Catálogo maestro de las 12 homologadas)
+
 
 
 

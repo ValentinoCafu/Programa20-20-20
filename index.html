@@ -218,34 +218,44 @@
 
       </div>
 
-      <!-- Banner de Acceso a Jefatura de Sección (Con Imagen Sunset) -->
+      <!-- Banner de Acceso a Jefaturas de Sección y Departamento (Con Imagen Sunset) -->
       <div class="relative rounded-3xl overflow-hidden shadow-xl border border-slate-800 bg-slate-900 text-white mt-6">
         <img src="assets/tecsur-sunset.jpg" alt="Operaciones al atardecer" class="absolute inset-0 w-full h-full object-cover object-center opacity-30">
         <div class="relative z-10 p-6 sm:p-7 flex flex-wrap items-center justify-between gap-4">
           <div class="max-w-xl space-y-1.5">
             <div class="flex items-center gap-2">
               <span class="text-[10px] font-black uppercase px-2.5 py-0.5 rounded bg-blue-600 text-white tracking-wider">
-                Exclusivo Jefaturas Tecsur
+                Línea de Mando Tecsur
+              </span>
+              <span class="text-[10px] font-bold text-amberBrand-400 bg-amberBrand-500/10 border border-amberBrand-400/20 px-2 py-0.5 rounded">
+                3 Jefes de Sección + Dpto. Edder
               </span>
             </div>
             <h4 class="text-lg sm:text-xl font-black tracking-tight">
-              ¿Eres Jefe de Sección? Evaluación 20-20-20 & Consolidado 360°
+              Portal Jefaturas: Evaluación 20-20-20 & Consolidado 360°
             </h4>
             <p class="text-xs text-slate-300 leading-relaxed">
-              Califica los 20 comportamientos de tus 24 supervisores, ingresa las métricas duras (avance %, accidentes, calidad) y exporta los reportes automáticos en Excel.
+              Evalúa los 20 comportamientos por supervisor, carga las métricas duras (avance %, accidentes, calidad) y exporta los tableros ejecutivos en Excel.
             </p>
           </div>
-          <button onclick="iniciarLogin('JEFE_SECCION')" class="px-5 py-3 bg-amberBrand-500 hover:bg-amberBrand-400 text-slate-950 text-xs font-black rounded-2xl shadow-lg transition flex items-center gap-2 shrink-0">
-            <span>Ingresar al Portal Jefatura</span>
-            <i data-lucide="arrow-right" class="w-4 h-4"></i>
-          </button>
+          <div class="flex flex-wrap items-center gap-2.5">
+            <button onclick="iniciarLogin('JEFE_SECCION')" class="px-4 py-3 bg-white/10 hover:bg-white/20 text-white text-xs font-black rounded-2xl border border-white/20 transition flex items-center gap-1.5 shrink-0 shadow">
+              <i data-lucide="shield-check" class="w-4 h-4 text-amberBrand-400"></i>
+              <span>Jefes de Sección (1, 2, 3)</span>
+            </button>
+            <button onclick="iniciarLogin('JEFE_DEPARTAMENTO')" class="px-5 py-3 bg-amberBrand-500 hover:bg-amberBrand-400 text-slate-950 text-xs font-black rounded-2xl shadow-lg transition flex items-center gap-2 shrink-0">
+              <i data-lucide="crown" class="w-4 h-4 text-slate-950"></i>
+              <span>Jefe Dpto (Edder)</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+          </div>
         </div>
       </div>
 
     </div>
 
     <!-- ========================================== -->
-    <!-- MODAL DE PIN / CONTRASEÑA POR ROL          -->
+    <!-- MODAL DE AUTENTICACIÓN / ACCESO POR ROL   -->
     <!-- ========================================== -->
     <div id="modal-login" class="hidden fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
       <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-slate-200 space-y-4">
@@ -261,20 +271,18 @@
           </button>
         </div>
 
-        <p class="text-xs text-slate-600">
-          Ingresa la clave de acceso autorizada para tu rol:
+        <p id="login-descripcion" class="text-xs text-slate-600">
+          Ingresa tu credencial autorizada para iniciar la evaluación:
         </p>
 
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1 uppercase tracking-wider">Clave de Seguridad:</label>
-          <input type="password" id="input-pin" placeholder="••••••••" class="w-full text-center tracking-widest text-lg font-mono px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-tecsur-500 focus:bg-white">
+          <label id="login-label" class="block text-xs font-bold text-slate-700 mb-1 uppercase tracking-wider">Número de DNI (8 dígitos):</label>
+          <input type="text" id="input-pin" placeholder="••••••••" class="w-full text-center tracking-widest text-lg font-mono px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-tecsur-500 focus:bg-white">
           <p id="error-pin" class="hidden text-xs text-rose-600 mt-1.5 font-bold flex items-center gap-1">
-            <i data-lucide="alert-circle" class="w-3.5 h-3.5"></i> Clave incorrecta. Inténtalo de nuevo.
+            <i data-lucide="alert-circle" class="w-3.5 h-3.5"></i> Credencial incorrecta. Inténtalo de nuevo.
           </p>
-          <div class="mt-3 text-[11px] text-slate-600 bg-slate-100 rounded-xl p-2.5 border border-slate-200">
-            <span class="font-bold text-slate-800">Claves activas del sistema:</span><br>
-            Capataz: <code class="bg-white px-1.5 py-0.5 rounded border font-bold text-slate-900">CAPATAZ2026</code> · Coord: <code class="bg-white px-1.5 py-0.5 rounded border font-bold text-slate-900">COORD2026</code><br>
-            Luz del Sur: <code class="bg-white px-1.5 py-0.5 rounded border font-bold text-slate-900">LDS2026</code> · Jefatura: <code class="bg-white px-1.5 py-0.5 rounded border font-bold text-slate-900">JEFE2026</code>
+          <div id="login-ayuda-claves" class="mt-3 text-[11px] text-slate-600 bg-slate-100 rounded-xl p-2.5 border border-slate-200">
+            <!-- Texto dinámico según el rol -->
           </div>
         </div>
 
@@ -283,7 +291,7 @@
             Cancelar
           </button>
           <button onclick="verificarLogin()" class="flex-1 py-2.5 px-3 bg-tecsur-600 hover:bg-tecsur-700 text-white rounded-xl text-xs font-bold shadow-md transition">
-            Entrar a Evaluar
+            Ingresar al Sistema
           </button>
         </div>
       </div>
@@ -314,12 +322,19 @@
             1. Empresa Subcontratista de Campo <span class="text-rose-500">*</span>
           </label>
           <select id="select-subcontratista" onchange="toggleOtraContratista(this.value)" class="w-full px-3.5 py-3 bg-slate-50 border border-slate-300 rounded-2xl text-sm font-semibold focus:ring-2 focus:ring-tecsur-500 focus:bg-white outline-none transition">
-            <option value="">-- Seleccione la empresa contratista --</option>
-            <option value="COBRA PERU S.A.">COBRA PERÚ S.A.</option>
-            <option value="CAM PERU S.R.L.">CAM PERÚ S.R.L.</option>
-            <option value="EIFFAGE ENERGIA">EIFFAGE ENERGÍA</option>
-            <option value="CONSORCIO ELECTRICO LIMA">CONSORCIO ELÉCTRICO LIMA</option>
-            <option value="INGENIEROS Y CONTRATISTAS">INGENIEROS Y CONTRATISTAS S.A.</option>
+            <option value="">-- Seleccione la empresa subcontratista oficial (12 homologadas) --</option>
+            <option value="ALIHCOM BUILD SAC">ALIHCOM BUILD SAC</option>
+            <option value="ALVIMAR">ALVIMAR</option>
+            <option value="CAMPOS LATAM">CAMPOS LATAM</option>
+            <option value="COSORCIO CARTER RENSA">COSORCIO CARTER RENSA</option>
+            <option value="ENCOSSA SAC">ENCOSSA SAC</option>
+            <option value="EOS">EOS</option>
+            <option value="GRUCOIN S.A.C.">GRUCOIN S.A.C.</option>
+            <option value="GRUPO ACUARIUS">GRUPO ACUARIUS</option>
+            <option value="GRUPO ENERGIA">GRUPO ENERGIA</option>
+            <option value="KIMSA">KIMSA</option>
+            <option value="NATURAL GAS COMPANY">NATURAL GAS COMPANY</option>
+            <option value="PRODUCSA">PRODUCSA</option>
             <option value="OTRA">OTRA EMPRESA (Especificar nombre)</option>
           </select>
           <input type="text" id="input-otra-contratista" placeholder="Escriba el nombre exacto de la contratista..." class="hidden w-full px-3.5 py-2.5 text-sm border border-slate-300 rounded-xl mt-2 bg-slate-50 focus:bg-white">
@@ -476,7 +491,7 @@
     </div>
 
     <!-- ========================================== -->
-    <!-- PORTAL JEFATURA DE SECCIÓN (CONSOLIDADO)   -->
+    <!-- PORTAL JEFATURA DE SECCIÓN & DPTO (CONSOLIDADO) -->
     <!-- ========================================== -->
     <div id="pantalla-jefatura" class="hidden space-y-6">
       
@@ -486,18 +501,26 @@
           <button onclick="volverAInicio()" class="text-xs text-tecsur-600 hover:underline flex items-center gap-1 font-bold mb-1">
             <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Salir al inicio
           </button>
-          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 flex items-center gap-2">
-            Portal Jefatura de Sección
-            <span class="text-xs bg-amberBrand-500 text-slate-950 px-3 py-1 rounded-full font-black uppercase tracking-wider">
-              Consolidador 360°
-            </span>
-          </h2>
-          <p class="text-xs text-slate-500 mt-0.5">
-            Evalúa los 20 comportamientos por supervisor, carga las métricas duras y exporta los indicadores a Excel.
+          <div class="flex flex-wrap items-center gap-2.5">
+            <h2 id="titulo-portal-jefatura" class="text-2xl sm:text-3xl font-black text-slate-900 flex items-center gap-2">
+              Portal Jefatura Tecsur
+            </h2>
+            <div id="badge-jefatura-usuario" class="text-xs font-black px-3 py-1 rounded-full bg-slate-900 text-amberBrand-400 border border-slate-700 flex items-center gap-1.5 shadow-sm">
+              <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+              <span>Consolidado 360°</span>
+            </div>
+          </div>
+          <p class="text-xs text-slate-500 mt-1">
+            Gobernanza directiva: evalúa los 20 comportamientos por supervisor, audita métricas duras y exporta los indicadores a Excel.
           </p>
         </div>
 
         <div class="flex flex-wrap items-center gap-2">
+          <!-- Botón Plantilla de Requerimiento de Asignaciones para Edder -->
+          <button onclick="descargarPlantillaEdderXLSX()" class="text-xs text-tecsur-700 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-3.5 py-2.5 rounded-2xl font-black flex items-center gap-1.5 transition shadow-sm hover:shadow-blue-500/10" title="Descargar Matriz de Asignaciones en Excel para Edder">
+            <i data-lucide="file-check-2" class="w-4 h-4 text-tecsur-600"></i>
+            <span>Plantilla Asignaciones Edder (.xlsx)</span>
+          </button>
           <!-- Botón de Exportar a Excel (.xlsx) Destacado -->
           <button onclick="exportarExcelCompletoXLSX()" class="text-xs text-white bg-emerald-600 hover:bg-emerald-500 border border-emerald-700 px-4 py-2.5 rounded-2xl font-black flex items-center gap-2 transition shadow-md hover:shadow-emerald-500/30">
             <i data-lucide="file-spreadsheet" class="w-4 h-4 text-emerald-200"></i>
@@ -665,8 +688,13 @@
             <h3 class="font-black text-sm text-slate-900">Matriz de Desempeño y Calibración (24 Supervisores)</h3>
             <p class="text-xs text-slate-500">Haz clic en <strong>"Evaluar 20 Comps"</strong> para calificar o en <strong>"Cargar KPIs"</strong> para ingresar datos duros.</p>
           </div>
-          <div class="flex items-center gap-2">
-            <input type="text" id="filtro-tabla-nombre" onkeyup="filtrarTablaSupervisores(this.value)" placeholder="Buscar por nombre o CR..." class="text-xs px-3.5 py-2 border border-slate-300 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-tecsur-500">
+          <div class="flex flex-wrap items-center gap-2">
+            <div class="flex gap-1 bg-white border border-slate-300 p-1 rounded-xl shadow-xs">
+              <button type="button" onclick="filtrarTablaPorCR('TODOS')" id="btn-filtro-cr-todos" class="px-2.5 py-1 text-xs rounded-lg font-bold bg-slate-900 text-white">Todos (24)</button>
+              <button type="button" onclick="filtrarTablaPorCR('4301')" id="btn-filtro-cr-4301" class="px-2.5 py-1 text-xs rounded-lg font-bold text-slate-600 hover:bg-slate-100">CR 4301 Obras BT (21)</button>
+              <button type="button" onclick="filtrarTablaPorCR('4070')" id="btn-filtro-cr-4070" class="px-2.5 py-1 text-xs rounded-lg font-bold text-slate-600 hover:bg-slate-100">CR 4070 Planif. (3)</button>
+            </div>
+            <input type="text" id="filtro-tabla-nombre" onkeyup="filtrarTablaSupervisores(this.value)" placeholder="Buscar por nombre..." class="text-xs px-3.5 py-2 border border-slate-300 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-tecsur-500">
           </div>
         </div>
 
@@ -841,47 +869,261 @@
       { id: 'sup-24', nombre: 'CARBAJAL VILLASANA JOEL', cargo: 'SUPERVISOR C', cr: '4301', crDesc: 'OBRAS BAJA TENSION' }
     ];
 
-    // 2. DATA MAESTRA DE COMPORTAMIENTOS TECSUR (20)
+    // 2. DATA MAESTRA DE COMPORTAMIENTOS TECSUR (20) CON PERSPECTIVA ADAPTADA POR ROL
     const COMPORTAMIENTOS = [
       // BLOQUE 1: INICIO Y VALIDACIÓN TÉCNICA (1-4)
-      { id: 1, bloque: 'INICIO Y VALIDACIÓN TÉCNICA', criterio: 'OBJETIVOS', desc: 'Realiza la inspección previa del frente de trabajo antes de autorizar el inicio de las actividades.', roles: ['COORD_CONTRATISTA', 'JEFE_SECCION'] },
-      { id: 2, bloque: 'INICIO Y VALIDACIÓN TÉCNICA', criterio: 'CALIDAD', desc: 'Contrasta las condiciones reales del campo con el alcance, planos, croquis, especificaciones técnicas y requisitos del cliente.', roles: ['LUZ_DEL_SUR', 'JEFE_SECCION'] },
-      { id: 3, bloque: 'INICIO Y VALIDACIÓN TÉCNICA', criterio: 'SEGURIDAD', desc: 'Verifica que la SST cuente con la documentación completa, vigente y admisible antes de iniciar los trabajos.', roles: ['LUZ_DEL_SUR', 'JEFE_SECCION'] },
-      { id: 4, bloque: 'INICIO Y VALIDACIÓN TÉCNICA', criterio: 'CALIDAD', desc: 'Identifica oportunamente interferencias, accesos restringidos, riesgos del entorno, condiciones climáticas u otros obstáculos que puedan afectar la ejecución.', roles: ['LUZ_DEL_SUR', 'COORD_CONTRATISTA', 'JEFE_SECCION'] },
+      { 
+        id: 1, 
+        bloque: 'INICIO Y VALIDACIÓN TÉCNICA', 
+        criterio: 'OBJETIVOS', 
+        desc: 'Realiza la inspección previa del frente de trabajo antes de autorizar el inicio de las actividades.', 
+        roles: ['COORD_CONTRATISTA', 'JEFE_SECCION'],
+        descPorRol: {
+          COORD_CONTRATISTA: '¿El supervisor inspecciona y valida previamente con nosotros el frente de trabajo antes de autorizar el inicio de las actividades?',
+          JEFE_SECCION: 'Realiza la inspección previa del frente de trabajo antes de autorizar el inicio de las actividades.'
+        }
+      },
+      { 
+        id: 2, 
+        bloque: 'INICIO Y VALIDACIÓN TÉCNICA', 
+        criterio: 'CALIDAD', 
+        desc: 'Contrasta las condiciones reales del campo con el alcance, planos, croquis, especificaciones técnicas y requisitos del cliente.', 
+        roles: ['LUZ_DEL_SUR', 'JEFE_SECCION'],
+        descPorRol: {
+          LUZ_DEL_SUR: '¿El supervisor verifica que lo ejecutado en terreno coincida estrictamente con los planos, croquis y especificaciones técnicas normadas por Luz del Sur?',
+          JEFE_SECCION: 'Contrasta las condiciones reales del campo con el alcance, planos, croquis, especificaciones técnicas y requisitos del cliente.'
+        }
+      },
+      { 
+        id: 3, 
+        bloque: 'INICIO Y VALIDACIÓN TÉCNICA', 
+        criterio: 'SEGURIDAD', 
+        desc: 'Verifica que la SST cuente con la documentación completa, vigente y admisible antes de iniciar los trabajos.', 
+        roles: ['LUZ_DEL_SUR', 'JEFE_SECCION'],
+        descPorRol: {
+          LUZ_DEL_SUR: '¿El supervisor fiscaliza que la cuadrilla cuente con toda la documentación de SST (permisos, AST, cartas de pase) completa, vigente y conforme a los estándares LDS?',
+          JEFE_SECCION: 'Verifica que la SST cuente con la documentación completa, vigente y admisible antes de iniciar los trabajos.'
+        }
+      },
+      { 
+        id: 4, 
+        bloque: 'INICIO Y VALIDACIÓN TÉCNICA', 
+        criterio: 'CALIDAD', 
+        desc: 'Identifica oportunamente interferencias, accesos restringidos, riesgos del entorno, condiciones climáticas u otros obstáculos que puedan afectar la ejecución.', 
+        roles: ['LUZ_DEL_SUR', 'COORD_CONTRATISTA', 'JEFE_SECCION'],
+        descPorRol: {
+          COORD_CONTRATISTA: '¿El supervisor detecta a tiempo interferencias, restricciones de acceso o riesgos del entorno para coordinar soluciones conjuntas antes de que afecten el avance?',
+          LUZ_DEL_SUR: '¿El supervisor identifica y nos alerta anticipadamente sobre interferencias con otras redes o condiciones del entorno que puedan impactar la infraestructura de LDS?',
+          JEFE_SECCION: 'Identifica oportunamente interferencias, accesos restringidos, riesgos del entorno, condiciones climáticas u otros obstáculos que puedan afectar la ejecución.'
+        }
+      },
       
       // BLOQUE 2: PLANIFICACIÓN Y PREPARACIÓN (5-10)
-      { id: 5, bloque: 'PLANIFICACIÓN Y PREPARACIÓN', criterio: 'OBJETIVOS', desc: 'Programa las actividades y distribuye las SST de acuerdo con las prioridades operativas, los plazos comprometidos, la criticidad de los trabajos y la capacidad disponible.', roles: ['COORD_CONTRATISTA', 'JEFE_SECCION'] },
-      { id: 6, bloque: 'PLANIFICACIÓN Y PREPARACIÓN', criterio: 'OBJETIVOS', desc: 'Asigna o reasigna cuadrillas, frentes de trabajo y recursos de supervisión de acuerdo con la carga operativa y la criticidad de las actividades.', roles: ['COORD_CONTRATISTA', 'JEFE_SECCION'] },
-      { id: 7, bloque: 'PLANIFICACIÓN Y PREPARACIÓN', criterio: 'CALIDAD', desc: 'Verifica anticipadamente la disponibilidad, cantidad, condición y especificación de los materiales requeridos para ejecutar el trabajo.', roles: ['CAPATAZ', 'COORD_CONTRATISTA', 'JEFE_SECCION'] },
-      { id: 8, bloque: 'PLANIFICACIÓN Y PREPARACIÓN', criterio: 'SEGURIDAD', desc: 'Verifica que los equipos, herramientas, vehículos, maquinaria y recursos especiales requeridos se encuentren disponibles, operativos y en condiciones seguras.', roles: ['CAPATAZ', 'COORD_CONTRATISTA', 'JEFE_SECCION'] },
-      { id: 9, bloque: 'PLANIFICACIÓN Y PREPARACIÓN', criterio: 'OBJETIVOS', desc: 'Gestiona con anticipación los permisos, resguardos, apoyo policial, prevención vial, accesos, maquinaria u otros recursos necesarios para ejecutar el trabajo de forma segura y continua.', roles: ['COORD_CONTRATISTA', 'JEFE_SECCION'] },
-      { id: 10, bloque: 'PLANIFICACIÓN Y PREPARACIÓN', criterio: 'OBJETIVOS', desc: 'Identifica actividades críticas y establece medidas preventivas, coordinaciones o reprogramaciones para evitar impactos en seguridad, calidad, plazo o continuidad del servicio.', roles: ['COORD_CONTRATISTA', 'JEFE_SECCION'] },
+      { 
+        id: 5, 
+        bloque: 'PLANIFICACIÓN Y PREPARACIÓN', 
+        criterio: 'OBJETIVOS', 
+        desc: 'Programa las actividades y distribuye las SST de acuerdo con las prioridades operativas, los plazos comprometidos, la criticidad de los trabajos y la capacidad disponible.', 
+        roles: ['COORD_CONTRATISTA', 'JEFE_SECCION'],
+        descPorRol: {
+          COORD_CONTRATISTA: '¿El supervisor programa y distribuye las órdenes de trabajo con anticipación clara, considerando las prioridades, plazos y recursos reales acordados con nuestra contrata?',
+          JEFE_SECCION: 'Programa las actividades y distribuye las SST de acuerdo con las prioridades operativas, los plazos comprometidos, la criticidad de los trabajos y la capacidad disponible.'
+        }
+      },
+      { 
+        id: 6, 
+        bloque: 'PLANIFICACIÓN Y PREPARACIÓN', 
+        criterio: 'OBJETIVOS', 
+        desc: 'Asigna o reasigna cuadrillas, frentes de trabajo y recursos de supervisión de acuerdo con la carga operativa y la criticidad de las actividades.', 
+        roles: ['COORD_CONTRATISTA', 'JEFE_SECCION'],
+        descPorRol: {
+          COORD_CONTRATISTA: '¿El supervisor coordina de forma equitativa y oportuna la asignación o movimiento de cuadrillas según la criticidad y demanda de los frentes de trabajo?',
+          JEFE_SECCION: 'Asigna o reasigna cuadrillas, frentes de trabajo y recursos de supervisión de acuerdo con la carga operativa y la criticidad de las actividades.'
+        }
+      },
+      { 
+        id: 7, 
+        bloque: 'PLANIFICACIÓN Y PREPARACIÓN', 
+        criterio: 'CALIDAD', 
+        desc: 'Verifica anticipadamente la disponibilidad, cantidad, condición y especificación de los materiales requeridos para ejecutar el trabajo.', 
+        roles: ['CAPATAZ', 'COORD_CONTRATISTA', 'JEFE_SECCION'],
+        descPorRol: {
+          CAPATAZ: '¿El supervisor revisa con nosotros (capataz/cuadrilla) que tengamos los materiales correctos, completos y en buen estado antes de empezar la faena?',
+          COORD_CONTRATISTA: '¿El supervisor valida con nosotros la disponibilidad, despacho y especificación técnica de los materiales para que las cuadrillas no queden desabastecidas?',
+          JEFE_SECCION: 'Verifica anticipadamente la disponibilidad, cantidad, condición y especificación de los materiales requeridos para ejecutar el trabajo.'
+        }
+      },
+      { 
+        id: 8, 
+        bloque: 'PLANIFICACIÓN Y PREPARACIÓN', 
+        criterio: 'SEGURIDAD', 
+        desc: 'Verifica que los equipos, herramientas, vehículos, maquinaria y recursos especiales requeridos se encuentren disponibles, operativos y en condiciones seguras.', 
+        roles: ['CAPATAZ', 'COORD_CONTRATISTA', 'JEFE_SECCION'],
+        descPorRol: {
+          CAPATAZ: '¿El supervisor inspecciona que nuestras herramientas, equipos y vehículos de trabajo estén operativos, con check-list al día y en condiciones seguras?',
+          COORD_CONTRATISTA: '¿El supervisor audita la operatividad y estado de mantenimiento de los equipos, herramientas y vehículos asignados a nuestros frentes?',
+          JEFE_SECCION: 'Verifica que los equipos, herramientas, vehículos, maquinaria y recursos especiales requeridos se encuentren disponibles, operativos y en condiciones seguras.'
+        }
+      },
+      { 
+        id: 9, 
+        bloque: 'PLANIFICACIÓN Y PREPARACIÓN', 
+        criterio: 'OBJETIVOS', 
+        desc: 'Gestiona con anticipación los permisos, resguardos, apoyo policial, prevención vial, accesos, maquinaria u otros recursos necesarios para ejecutar el trabajo de forma segura y continua.', 
+        roles: ['COORD_CONTRATISTA', 'JEFE_SECCION'],
+        descPorRol: {
+          COORD_CONTRATISTA: '¿El supervisor gestiona con la debida anticipación los permisos municipales, planes de desvío vial, apoyos policiales o accesos necesarios para no trabar el avance?',
+          JEFE_SECCION: 'Gestiona con anticipación los permisos, resguardos, apoyo policial, prevención vial, accesos, maquinaria u otros recursos necesarios para ejecutar el trabajo de forma segura y continua.'
+        }
+      },
+      { 
+        id: 10, 
+        bloque: 'PLANIFICACIÓN Y PREPARACIÓN', 
+        criterio: 'OBJETIVOS', 
+        desc: 'Identifica actividades críticas y establece medidas preventivas, coordinaciones o reprogramaciones para evitar impactos en seguridad, calidad, plazo o continuidad del servicio.', 
+        roles: ['COORD_CONTRATISTA', 'JEFE_SECCION'],
+        descPorRol: {
+          COORD_CONTRATISTA: '¿El supervisor identifica con anticipación maniobras o empalmes de alta criticidad y coordina planes preventivos para no comprometer los plazos ni el servicio?',
+          JEFE_SECCION: 'Identifica actividades críticas y establece medidas preventivas, coordinaciones o reprogramaciones para evitar impactos en seguridad, calidad, plazo o continuidad del servicio.'
+        }
+      },
       
       // BLOQUE 3: SUPERVISIÓN Y EJECUCIÓN EN CAMPO (11-16)
-      { id: 11, bloque: 'SUPERVISIÓN Y EJECUCIÓN EN CAMPO', criterio: 'HABILIDADES_BLANDAS', desc: 'Realiza y registra la Instrucción Previa en Campo, comunicando las tareas, riesgos, controles, responsabilidades y cambios de condición al equipo.', roles: ['CAPATAZ', 'JEFE_SECCION'] },
-      { id: 12, bloque: 'SUPERVISIÓN Y EJECUCIÓN EN CAMPO', criterio: 'SEGURIDAD', desc: 'Verifica antes y durante la ejecución el uso correcto de EPP y el cumplimiento de los controles de seguridad establecidos.', roles: ['CAPATAZ', 'LUZ_DEL_SUR', 'JEFE_SECCION'] },
-      { id: 13, bloque: 'SUPERVISIÓN Y EJECUCIÓN EN CAMPO', criterio: 'SEGURIDAD', desc: 'Verifica que la zona de trabajo cuente con señalización, delimitación y condiciones adecuadas para proteger a trabajadores, peatones, terceros y tránsito.', roles: ['LUZ_DEL_SUR', 'JEFE_SECCION'] },
-      { id: 14, bloque: 'SUPERVISIÓN Y EJECUCIÓN EN CAMPO', criterio: 'CALIDAD', desc: 'Verifica que el personal y los contratistas cuenten con autorizaciones, identificación vigente, competencias y requisitos documentarios aplicables antes de ejecutar actividades.', roles: ['LUZ_DEL_SUR', 'COORD_CONTRATISTA', 'JEFE_SECCION'] },
-      { id: 15, bloque: 'SUPERVISIÓN Y EJECUCIÓN EN CAMPO', criterio: 'CALIDAD', desc: 'Supervisa directamente los momentos críticos de la actividad y verifica que el trabajo se ejecute de acuerdo con los planos, procedimientos, especificaciones técnicas y estándares del cliente.', roles: ['LUZ_DEL_SUR', 'JEFE_SECCION'] },
-      { id: 16, bloque: 'SUPERVISIÓN Y EJECUCIÓN EN CAMPO', criterio: 'HABILIDADES_BLANDAS', desc: 'Brinda orientación técnica clara al capataz y a la cuadrilla, resuelve consultas y corrige oportunamente prácticas que puedan generar riesgos, retrabajos o incumplimientos.', roles: ['CAPATAZ', 'JEFE_SECCION'] },
+      { 
+        id: 11, 
+        bloque: 'SUPERVISIÓN Y EJECUCIÓN EN CAMPO', 
+        criterio: 'HABILIDADES_BLANDAS', 
+        desc: 'Realiza y registra la Instrucción Previa en Campo, comunicando las tareas, riesgos, controles, responsabilidades y cambios de condición al equipo.', 
+        roles: ['CAPATAZ', 'JEFE_SECCION'],
+        descPorRol: {
+          CAPATAZ: '¿El supervisor participa y verifica que yo (el capataz) realice la Charla de 5 Minutos / Instrucción Previa, reforzando los riesgos críticos con mi cuadrilla?',
+          JEFE_SECCION: 'Realiza y registra la Instrucción Previa en Campo, comunicando las tareas, riesgos, controles, responsabilidades y cambios de condición al equipo.'
+        }
+      },
+      { 
+        id: 12, 
+        bloque: 'SUPERVISIÓN Y EJECUCIÓN EN CAMPO', 
+        criterio: 'SEGURIDAD', 
+        desc: 'Verifica antes y durante la ejecución el uso correcto de EPP y el cumplimiento de los controles de seguridad establecidos.', 
+        roles: ['CAPATAZ', 'LUZ_DEL_SUR', 'JEFE_SECCION'],
+        descPorRol: {
+          CAPATAZ: '¿El supervisor exige activamente en campo que todo mi personal use correctamente sus EPP (dieléctricos, barboquejo, guantes) y cumpla las normas de seguridad?',
+          LUZ_DEL_SUR: '¿El supervisor de Tecsur fiscaliza rigurosamente en campo que las cuadrillas contratistas utilicen los EPP normados y cumplan las reglas de oro de seguridad?',
+          JEFE_SECCION: 'Verifica antes y durante la ejecución el uso correcto de EPP y el cumplimiento de los controles de seguridad establecidos.'
+        }
+      },
+      { 
+        id: 13, 
+        bloque: 'SUPERVISIÓN Y EJECUCIÓN EN CAMPO', 
+        criterio: 'SEGURIDAD', 
+        desc: 'Verifica que la zona de trabajo cuente con señalización, delimitación y condiciones adecuadas para proteger a trabajadores, peatones, terceros y tránsito.', 
+        roles: ['LUZ_DEL_SUR', 'JEFE_SECCION'],
+        descPorRol: {
+          LUZ_DEL_SUR: '¿El supervisor asegura que la zona de trabajo esté correctamente cercada, con cachacos, mallas y señalización reglamentaria para evitar accidentes con terceros o peatones?',
+          JEFE_SECCION: 'Verifica que la zona de trabajo cuente con señalización, delimitación y condiciones adecuadas para proteger a trabajadores, peatones, terceros y tránsito.'
+        }
+      },
+      { 
+        id: 14, 
+        bloque: 'SUPERVISIÓN Y EJECUCIÓN EN CAMPO', 
+        criterio: 'CALIDAD', 
+        desc: 'Verifica que el personal y los contratistas cuenten con autorizaciones, identificación vigente, competencias y requisitos documentarios aplicables antes de ejecutar actividades.', 
+        roles: ['LUZ_DEL_SUR', 'COORD_CONTRATISTA', 'JEFE_SECCION'],
+        descPorRol: {
+          COORD_CONTRATISTA: '¿El supervisor valida con nosotros que el personal técnico habilitado cuente con sus fotochecks, SCTR, autorizaciones y calificaciones vigentes?',
+          LUZ_DEL_SUR: '¿El supervisor verifica que los trabajadores en campo cuenten con la fotocredencial, SCTR y competencias técnicas exigidas para intervenir redes de LDS?',
+          JEFE_SECCION: 'Verifica que el personal y los contratistas cuenten con autorizaciones, identificación vigente, competencias y requisitos documentarios aplicables antes de ejecutar actividades.'
+        }
+      },
+      { 
+        id: 15, 
+        bloque: 'SUPERVISIÓN Y EJECUCIÓN EN CAMPO', 
+        criterio: 'CALIDAD', 
+        desc: 'Supervisa directamente los momentos críticos de la actividad y verifica que el trabajo se ejecute de acuerdo con los planos, procedimientos, especificaciones técnicas y estándares del cliente.', 
+        roles: ['LUZ_DEL_SUR', 'JEFE_SECCION'],
+        descPorRol: {
+          LUZ_DEL_SUR: '¿El supervisor se encuentra presente en los hitos de mayor criticidad (empalmes, tendido, maniobras) asegurando que se cumpla la calidad técnica requerida por LDS?',
+          JEFE_SECCION: 'Supervisa directamente los momentos críticos de la actividad y verifica que el trabajo se ejecute de acuerdo con los planos, procedimientos, especificaciones técnicas y estándares del cliente.'
+        }
+      },
+      { 
+        id: 16, 
+        bloque: 'SUPERVISIÓN Y EJECUCIÓN EN CAMPO', 
+        criterio: 'HABILIDADES_BLANDAS', 
+        desc: 'Brinda orientación técnica clara al capataz y a la cuadrilla, resuelve consultas y corrige oportunamente prácticas que puedan generar riesgos, retrabajos o incumplimientos.', 
+        roles: ['CAPATAZ', 'JEFE_SECCION'],
+        descPorRol: {
+          CAPATAZ: '¿El supervisor me brinda explicaciones técnicas claras, me apoya si tengo dudas sobre el trabajo y me orienta con respeto para evitar rehacer tareas?',
+          JEFE_SECCION: 'Brinda orientación técnica clara al capataz y a la cuadrilla, resuelve consultas y corrige oportunamente prácticas que puedan generar riesgos, retrabajos o incumplimientos.'
+        }
+      },
       
       // BLOQUE 4: GESTIÓN DE SEGURIDAD, CONTROL Y CIERRE (17-20)
-      { id: 17, bloque: 'GESTIÓN DE SEGURIDAD, CONTROL Y CIERRE', criterio: 'SEGURIDAD', desc: 'Identifica, registra y comunica actos o condiciones subestándares; realiza inspecciones y observaciones preventivas y verifica la aplicación de Toma 5 y ALERT.', roles: ['CAPATAZ', 'JEFE_SECCION'] },
-      { id: 18, bloque: 'GESTIÓN DE SEGURIDAD, CONTROL Y CIERRE', criterio: 'SEGURIDAD', desc: 'Paraliza el trabajo ante una condición de riesgo inminente, comunica la situación a la línea de mando y verifica la corrección antes de autorizar el reinicio.', roles: ['CAPATAZ', 'LUZ_DEL_SUR', 'JEFE_SECCION'] },
-      { id: 19, bloque: 'GESTIÓN DE SEGURIDAD, CONTROL Y CIERRE', criterio: 'HABILIDADES_BLANDAS', desc: 'Gestiona cambios, interferencias, replanteos, contingencias y restricciones durante la ejecución; evalúa su impacto, obtiene las autorizaciones requeridas y registra las decisiones tomadas.', roles: ['COORD_CONTRATISTA', 'LUZ_DEL_SUR', 'JEFE_SECCION'] },
-      { id: 20, bloque: 'GESTIÓN DE SEGURIDAD, CONTROL Y CIERRE', criterio: 'OBJETIVOS', desc: 'Da seguimiento al avance, indicadores, observaciones y compromisos de cierre, asegurando la conformidad técnica, ambiental, documentaria y económica de la SST.', roles: ['COORD_CONTRATISTA', 'LUZ_DEL_SUR', 'JEFE_SECCION'] }
+      { 
+        id: 17, 
+        bloque: 'GESTIÓN DE SEGURIDAD, CONTROL Y CIERRE', 
+        criterio: 'SEGURIDAD', 
+        desc: 'Identifica, registra y comunica actos o condiciones subestándares; realiza inspecciones y observaciones preventivas y verifica la aplicación de Toma 5 y ALERT.', 
+        roles: ['CAPATAZ', 'JEFE_SECCION'],
+        descPorRol: {
+          CAPATAZ: '¿El supervisor nos ayuda a detectar condiciones peligrosas en el terreno y revisa que apliquemos la herramienta Toma 5 antes de empezar tareas de riesgo?',
+          JEFE_SECCION: 'Identifica, registra y comunica actos o condiciones subestándares; realiza inspecciones y observaciones preventivas y verifica la aplicación de Toma 5 y ALERT.'
+        }
+      },
+      { 
+        id: 18, 
+        bloque: 'GESTIÓN DE SEGURIDAD, CONTROL Y CIERRE', 
+        criterio: 'SEGURIDAD', 
+        desc: 'Paraliza el trabajo ante una condición de riesgo inminente, comunica la situación a la línea de mando y verifica la corrección antes de autorizar el reinicio.', 
+        roles: ['CAPATAZ', 'LUZ_DEL_SUR', 'JEFE_SECCION'],
+        descPorRol: {
+          CAPATAZ: '¿Si existe un riesgo grave o falta de resguardo seguro, el supervisor detiene la labor inmediatamente sin presionarnos hasta que la condición sea corregida?',
+          LUZ_DEL_SUR: '¿El supervisor demuestra firmeza para paralizar inmediatamente los trabajos si detecta condiciones de riesgo inminente o desvíos graves a las normas de seguridad?',
+          JEFE_SECCION: 'Paraliza el trabajo ante una condición de riesgo inminente, comunica la situación a la línea de mando y verifica la corrección antes de autorizar el reinicio.'
+        }
+      },
+      { 
+        id: 19, 
+        bloque: 'GESTIÓN DE SEGURIDAD, CONTROL Y CIERRE', 
+        criterio: 'HABILIDADES_BLANDAS', 
+        desc: 'Gestiona cambios, interferencias, replanteos, contingencias y restricciones durante la ejecución; evalúa su impacto, obtiene las autorizaciones requeridas y registra las decisiones tomadas.', 
+        roles: ['COORD_CONTRATISTA', 'LUZ_DEL_SUR', 'JEFE_SECCION'],
+        descPorRol: {
+          COORD_CONTRATISTA: '¿El supervisor gestiona con rapidez y formalidad los replanteos o cambios de trazo en campo para que la cuadrilla no sufra paradas operativas?',
+          LUZ_DEL_SUR: '¿El supervisor nos consulta y sustenta técnicamente los replanteos o modificaciones al proyecto antes de autorizar su ejecución en campo?',
+          JEFE_SECCION: 'Gestiona cambios, interferencias, replanteos, contingencias y restricciones durante la ejecución; evalúa su impacto, obtiene las autorizaciones requeridas y registra las decisiones tomadas.'
+        }
+      },
+      { 
+        id: 20, 
+        bloque: 'GESTIÓN DE SEGURIDAD, CONTROL Y CIERRE', 
+        criterio: 'OBJETIVOS', 
+        desc: 'Da seguimiento al avance, indicadores, observaciones y compromisos de cierre, asegurando la conformidad técnica, ambiental, documentaria y económica de la SST.', 
+        roles: ['COORD_CONTRATISTA', 'LUZ_DEL_SUR', 'JEFE_SECCION'],
+        descPorRol: {
+          COORD_CONTRATISTA: '¿El supervisor efectúa con nosotros el cierre ordenado de la obra, levantando observaciones técnicas y documentarias para la valorización y liquidación oportuna?',
+          LUZ_DEL_SUR: '¿El supervisor entrega las obras con la documentación conforme, levantamiento oportuno de observaciones y la calidad final lista para recepción de Luz del Sur?',
+          JEFE_SECCION: 'Da seguimiento al avance, indicadores, observaciones y compromisos de cierre, asegurando la conformidad técnica, ambiental, documentaria y económica de la SST.'
+        }
+      }
     ];
 
     const CLAVES = {
-      CAPATAZ: 'CAPATAZ2026',
-      COORD_CONTRATISTA: 'COORD2026',
+      // Capataces y Coordinadores ingresan con su DNI (8 dígitos)
       LUZ_DEL_SUR: 'LDS2026',
-      JEFE_SECCION: 'JEFE2026'
+      // 3 Jefaturas de Sección
+      JEFE_SECCION_1: 'SECCION1',
+      JEFE_SECCION_2: 'SECCION2',
+      JEFE_SECCION_3: 'SECCION3',
+      JEFE_SECCION_GENERAL: 'JEFE2026',
+      // Jefe de Departamento (Edder)
+      JEFE_DEPARTAMENTO: 'EDDER2026'
     };
 
     // Estado Global
     let rolSeleccionado = null;
     let rolLogueado = null;
+    let usuarioActual = { rol: null, id: null, nombre: null, seccion: 'TODAS' };
     let supervisorSeleccionado = null;
     let respuestasActuales = {};
     let supervisorDataDuraModal = null;
@@ -904,12 +1146,14 @@
     function volverAInicio() {
       rolSeleccionado = null;
       rolLogueado = null;
+      usuarioActual = { rol: null, id: null, nombre: null, seccion: 'TODAS' };
       respuestasActuales = {};
       mostrarPantalla('pantalla-inicio');
     }
 
     function irAPortalJefaturaDirecto() {
       rolLogueado = 'JEFE_SECCION';
+      usuarioActual = { rol: 'JEFE_SECCION', nombre: 'Jefatura de Sección', seccion: 'TODAS' };
       mostrarPantalla('pantalla-jefatura');
       renderizarTablaSupervisores();
     }
@@ -919,16 +1163,56 @@
       rolSeleccionado = rol;
       const modal = document.getElementById('modal-login');
       const titulo = document.getElementById('login-titulo-rol');
+      const desc = document.getElementById('login-descripcion');
+      const label = document.getElementById('login-label');
       const input = document.getElementById('input-pin');
       const error = document.getElementById('error-pin');
+      const ayuda = document.getElementById('login-ayuda-claves');
 
       error.classList.add('hidden');
       input.value = '';
 
-      if (rol === 'CAPATAZ') titulo.textContent = 'Acceso Capataz Contratista';
-      else if (rol === 'COORD_CONTRATISTA') titulo.textContent = 'Acceso Coordinador Contratista';
-      else if (rol === 'LUZ_DEL_SUR') titulo.textContent = 'Acceso Inspector Luz del Sur';
-      else if (rol === 'JEFE_SECCION') titulo.textContent = 'Acceso Jefatura de Sección';
+      if (rol === 'CAPATAZ') {
+        titulo.textContent = 'Acceso Capataz Contratista';
+        desc.textContent = 'Ingresa tu número de DNI para validar tu identidad de evaluador de campo:';
+        label.textContent = 'Número de DNI (8 dígitos):';
+        input.type = 'tel';
+        input.maxLength = 8;
+        input.placeholder = 'Ej. 45892147';
+        ayuda.innerHTML = '<span class="font-bold text-slate-800">Identificación por DNI:</span> Los capataces de las 12 subcontratistas ingresan con su número de DNI de 8 dígitos para trazabilidad de campo.';
+      } else if (rol === 'COORD_CONTRATISTA') {
+        titulo.textContent = 'Acceso Coordinador Contratista';
+        desc.textContent = 'Ingresa tu número de DNI para registrar la evaluación de gestión del contratista:';
+        label.textContent = 'Número de DNI (8 dígitos):';
+        input.type = 'tel';
+        input.maxLength = 8;
+        input.placeholder = 'Ej. 72481953';
+        ayuda.innerHTML = '<span class="font-bold text-slate-800">Identificación por DNI:</span> Los coordinadores de proyectos ingresan con su número de DNI de 8 dígitos para trazabilidad operativa.';
+      } else if (rol === 'LUZ_DEL_SUR') {
+        titulo.textContent = 'Acceso Inspector Luz del Sur';
+        desc.textContent = 'Ingresa la clave institucional asignada para Inspectores y Proyectistas de Luz del Sur:';
+        label.textContent = 'Clave Institucional:';
+        input.type = 'password';
+        input.maxLength = 20;
+        input.placeholder = '••••••••';
+        ayuda.innerHTML = '<span class="font-bold text-slate-800">Clave LDS:</span> <code class="bg-white px-1.5 py-0.5 rounded border font-bold text-slate-900">LDS2026</code>';
+      } else if (rol === 'JEFE_SECCION') {
+        titulo.textContent = 'Acceso Jefatura de Sección';
+        desc.textContent = 'Ingresa la clave de tu Sección operativa (Sección 1, 2, 3) o la clave general de Jefatura:';
+        label.textContent = 'Clave de Jefatura:';
+        input.type = 'password';
+        input.maxLength = 20;
+        input.placeholder = '••••••••';
+        ayuda.innerHTML = '<span class="font-bold text-slate-800">Claves activas de Sección:</span><br>Sección 1: <code class="bg-white px-1 rounded border font-bold">SECCION1</code> · Sección 2: <code class="bg-white px-1 rounded border font-bold">SECCION2</code><br>Sección 3 (Planif.): <code class="bg-white px-1 rounded border font-bold">SECCION3</code> · General: <code class="bg-white px-1 rounded border font-bold">JEFE2026</code>';
+      } else if (rol === 'JEFE_DEPARTAMENTO') {
+        titulo.textContent = 'Acceso Jefe de Departamento (Edder)';
+        desc.textContent = 'Portal exclusivo de gobernanza para el Jefe de Departamento de Obras BT:';
+        label.textContent = 'Clave Directiva:';
+        input.type = 'password';
+        input.maxLength = 20;
+        input.placeholder = '••••••••';
+        ayuda.innerHTML = '<span class="font-bold text-slate-800">Clave de Departamento:</span> <code class="bg-white px-1.5 py-0.5 rounded border font-bold text-slate-900">EDDER2026</code>';
+      }
 
       modal.classList.remove('hidden');
       input.focus();
@@ -940,41 +1224,103 @@
 
     function verificarLogin() {
       const pin = document.getElementById('input-pin').value.trim();
-      const claveCorrecta = CLAVES[rolSeleccionado];
+      const pinUpper = pin.toUpperCase();
+      const error = document.getElementById('error-pin');
 
-      if (pin === claveCorrecta) {
+      // 1. Capataces y Coordinadores: Validación estricta de DNI (8 dígitos)
+      if (rolSeleccionado === 'CAPATAZ' || rolSeleccionado === 'COORD_CONTRATISTA') {
+        const soloDigitos = pin.replace(/\D/g, '');
+        if (soloDigitos.length !== 8) {
+          error.textContent = '⚠️ Ingresa un número de DNI válido de 8 dígitos numéricos.';
+          error.classList.remove('hidden');
+          return;
+        }
+        
+        usuarioActual = {
+          rol: rolSeleccionado,
+          dni: soloDigitos,
+          nombre: `DNI ${soloDigitos}`
+        };
         rolLogueado = rolSeleccionado;
         cerrarLogin();
-        
-        if (rolLogueado === 'JEFE_SECCION') {
+        configurarPantallaDatos(rolLogueado, soloDigitos);
+        mostrarPantalla('pantalla-datos');
+        return;
+      }
+
+      // 2. Luz del Sur
+      if (rolSeleccionado === 'LUZ_DEL_SUR') {
+        if (pinUpper === CLAVES.LUZ_DEL_SUR) {
+          usuarioActual = { rol: 'LUZ_DEL_SUR', nombre: 'Inspector Luz del Sur' };
+          rolLogueado = 'LUZ_DEL_SUR';
+          cerrarLogin();
+          configurarPantallaDatos(rolLogueado);
+          mostrarPantalla('pantalla-datos');
+        } else {
+          error.textContent = '⚠️ Clave de Luz del Sur incorrecta. Use: LDS2026';
+          error.classList.remove('hidden');
+        }
+        return;
+      }
+
+      // 3. Jefes de Sección
+      if (rolSeleccionado === 'JEFE_SECCION') {
+        if (pinUpper === 'SECCION1' || pinUpper === 'SECCION2' || pinUpper === 'SECCION3' || pinUpper === 'JEFE2026') {
+          let seccion = 'TODAS';
+          let nombreSec = 'Jefatura de Sección';
+          if (pinUpper === 'SECCION1') { seccion = 'SEC1'; nombreSec = 'Jefe Sección 1 (CR 4301)'; }
+          else if (pinUpper === 'SECCION2') { seccion = 'SEC2'; nombreSec = 'Jefe Sección 2 (CR 4301)'; }
+          else if (pinUpper === 'SECCION3') { seccion = 'SEC3'; nombreSec = 'Jefe Sección 3 (CR 4070 Planif.)'; }
+          
+          usuarioActual = { rol: 'JEFE_SECCION', nombre: nombreSec, seccion: seccion };
+          rolLogueado = 'JEFE_SECCION';
+          cerrarLogin();
           mostrarPantalla('pantalla-jefatura');
           renderizarTablaSupervisores();
         } else {
-          configurarPantallaDatos(rolLogueado);
-          mostrarPantalla('pantalla-datos');
+          error.textContent = '⚠️ Clave de Sección incorrecta. (Use: SECCION1, SECCION2, SECCION3 o JEFE2026)';
+          error.classList.remove('hidden');
         }
-      } else {
-        document.getElementById('error-pin').classList.remove('hidden');
+        return;
+      }
+
+      // 4. Jefe de Departamento (Edder)
+      if (rolSeleccionado === 'JEFE_DEPARTAMENTO') {
+        if (pinUpper === CLAVES.JEFE_DEPARTAMENTO || pinUpper === 'EDDER') {
+          usuarioActual = { rol: 'JEFE_DEPARTAMENTO', nombre: 'Edder (Jefe de Departamento Obras BT)', seccion: 'TODAS' };
+          rolLogueado = 'JEFE_DEPARTAMENTO';
+          cerrarLogin();
+          mostrarPantalla('pantalla-jefatura');
+          renderizarTablaSupervisores();
+        } else {
+          error.textContent = '⚠️ Clave directiva incorrecta. (Use: EDDER2026)';
+          error.classList.remove('hidden');
+        }
+        return;
       }
     }
 
     // Configurar Pantalla de Datos
-    function configurarPantallaDatos(rol) {
+    function configurarPantallaDatos(rol, dni = '') {
       const secContratista = document.getElementById('seccion-subcontratista');
       const badge = document.getElementById('badge-rol-actual');
+      const inputEvaluador = document.getElementById('input-nombre-evaluador');
 
       if (rol === 'CAPATAZ') {
         secContratista.classList.remove('hidden');
         badge.className = 'px-3.5 py-1.5 rounded-full text-xs font-black uppercase tracking-wider bg-amberBrand-100 text-amberBrand-700 border border-amberBrand-300';
-        badge.textContent = 'Capataz Contratista';
+        badge.textContent = `Capataz (DNI: ${dni})`;
+        if (dni) inputEvaluador.value = `Capataz DNI ${dni}`;
       } else if (rol === 'COORD_CONTRATISTA') {
         secContratista.classList.remove('hidden');
         badge.className = 'px-3.5 py-1.5 rounded-full text-xs font-black uppercase tracking-wider bg-blue-100 text-tecsur-700 border border-blue-300';
-        badge.textContent = 'Coordinador Contratista';
+        badge.textContent = `Coordinador (DNI: ${dni})`;
+        if (dni) inputEvaluador.value = `Coordinador DNI ${dni}`;
       } else if (rol === 'LUZ_DEL_SUR') {
         secContratista.classList.add('hidden');
         badge.className = 'px-3.5 py-1.5 rounded-full text-xs font-black uppercase tracking-wider bg-orange-100 text-lds-600 border border-orange-300';
         badge.textContent = 'Cliente Luz del Sur';
+        inputEvaluador.value = 'Inspector Luz del Sur';
       }
     }
 
@@ -1051,15 +1397,17 @@
       iniciarCuestionarioSupervisor(supervisorSeleccionado, rolLogueado);
     }
 
-    // Iniciar Cuestionario (Sirve tanto para externos como para el Jefe de Sección)
+    // Iniciar Cuestionario (Sirve tanto para externos como para Jefatura)
     function iniciarCuestionarioSupervisor(sup, rol) {
       supervisorSeleccionado = sup;
       rolLogueado = rol;
       respuestasActuales = {};
 
-      if (rol === 'JEFE_SECCION') {
+      const esJefatura = (rol === 'JEFE_SECCION' || rol === 'JEFE_DEPARTAMENTO');
+
+      if (esJefatura) {
         const historial = JSON.parse(localStorage.getItem('evaluaciones_20_20') || '[]');
-        const prevJefe = historial.find(h => h.supervisorId === sup.id && h.rol === 'JEFE_SECCION');
+        const prevJefe = historial.find(h => h.supervisorId === sup.id && (h.rol === 'JEFE_SECCION' || h.rol === 'JEFE_DEPARTAMENTO'));
         if (prevJefe && prevJefe.respuestas) {
           respuestasActuales = { ...prevJefe.respuestas };
         }
@@ -1069,26 +1417,29 @@
       document.getElementById('resumen-cr-supervisor').textContent = `${sup.cargo} · CR ${sup.cr} (${sup.crDesc})`;
       
       const sub = document.getElementById('subtitulo-rol-cuestionario');
-      if (rol === 'JEFE_SECCION') {
-        sub.textContent = 'EVALUACIÓN FORMAL DE JEFATURA · 20 COMPORTAMIENTOS OBSERVABLES';
+      if (rol === 'JEFE_DEPARTAMENTO') {
+        sub.textContent = 'EVALUACIÓN DIRECTIVA · JEFE DE DEPARTAMENTO (EDDER)';
+      } else if (rol === 'JEFE_SECCION') {
+        sub.textContent = 'EVALUACIÓN FORMAL DE JEFATURA DE SECCIÓN · 20 COMPORTAMIENTOS';
       } else if (rol === 'CAPATAZ') {
-        sub.textContent = 'EVALUACIÓN DE CAMPO · CAPATAZ CONTRATISTA';
+        sub.textContent = 'EVALUACIÓN DE CAMPO · MIRADA DEL CAPATAZ CONTRATISTA';
       } else if (rol === 'COORD_CONTRATISTA') {
-        sub.textContent = 'EVALUACIÓN DE GESTIÓN · COORDINADOR CONTRATISTA';
+        sub.textContent = 'EVALUACIÓN DE GESTIÓN · COORDINADOR DE PROYECTOS CONTRATISTA';
       } else if (rol === 'LUZ_DEL_SUR') {
-        sub.textContent = 'EVALUACIÓN DE CLIENTE · INSPECCIÓN LUZ DEL SUR';
+        sub.textContent = 'EVALUACIÓN DE CLIENTE · FISCALIZACIÓN LUZ DEL SUR';
       }
 
       renderizarPreguntas();
       mostrarPantalla('pantalla-cuestionario');
     }
 
-    // Renderizar Preguntas Agrupadas por Bloques
+    // Renderizar Preguntas Agrupadas por Bloques con Redacción Adaptada al Rol
     function renderizarPreguntas() {
       const contenedor = document.getElementById('contenedor-preguntas');
       contenedor.innerHTML = '';
 
-      const preguntas = COMPORTAMIENTOS.filter(c => c.roles.includes(rolLogueado));
+      const esJefatura = (rolLogueado === 'JEFE_SECCION' || rolLogueado === 'JEFE_DEPARTAMENTO');
+      const preguntas = COMPORTAMIENTOS.filter(c => c.roles.includes(rolLogueado) || (esJefatura && c.roles.includes('JEFE_SECCION')));
       const bloques = [...new Set(preguntas.map(p => p.bloque))];
 
       bloques.forEach((nombreBloque) => {
@@ -1113,6 +1464,9 @@
           card.className = 'bg-white border border-slate-200 rounded-3xl p-5 shadow-sm space-y-3';
           card.id = `card-comp-${c.id}`;
 
+          // Redacción personalizada adaptada al punto de vista del rol
+          const textoPregunta = (c.descPorRol && c.descPorRol[rolLogueado]) ? c.descPorRol[rolLogueado] : c.desc;
+
           card.innerHTML = `
             <div class="flex items-start justify-between gap-2">
               <span class="text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-blue-50 text-tecsur-600 border border-blue-200">
@@ -1124,7 +1478,7 @@
             </div>
 
             <p class="text-sm font-bold text-slate-900 leading-snug">
-              ${c.desc}
+              ${textoPregunta}
             </p>
 
             <div class="pt-2">
@@ -1175,7 +1529,8 @@
     function marcarRespuesta(compId, puntaje) {
       respuestasActuales[compId] = puntaje;
       marcarEstiloBoton(compId, puntaje);
-      const totalPreguntas = COMPORTAMIENTOS.filter(c => c.roles.includes(rolLogueado)).length;
+      const esJefatura = (rolLogueado === 'JEFE_SECCION' || rolLogueado === 'JEFE_DEPARTAMENTO');
+      const totalPreguntas = COMPORTAMIENTOS.filter(c => c.roles.includes(rolLogueado) || (esJefatura && c.roles.includes('JEFE_SECCION'))).length;
       actualizarProgreso(Object.keys(respuestasActuales).length, totalPreguntas);
     }
 
@@ -1209,7 +1564,8 @@
 
     // Enviar Evaluación y Guardar
     function enviarEvaluacion() {
-      const preguntas = COMPORTAMIENTOS.filter(c => c.roles.includes(rolLogueado));
+      const esJefatura = (rolLogueado === 'JEFE_SECCION' || rolLogueado === 'JEFE_DEPARTAMENTO');
+      const preguntas = COMPORTAMIENTOS.filter(c => c.roles.includes(rolLogueado) || (esJefatura && c.roles.includes('JEFE_SECCION')));
       const respondidasCount = Object.keys(respuestasActuales).length;
 
       if (respondidasCount < preguntas.length) {
@@ -1218,22 +1574,40 @@
         }
       }
 
+      let subcontratistaFinal = 'N/A';
+      if (!esJefatura && rolLogueado !== 'LUZ_DEL_SUR') {
+        const selVal = document.getElementById('select-subcontratista').value;
+        if (selVal === 'OTRA') {
+          subcontratistaFinal = document.getElementById('input-otra-contratista').value.trim() || 'Otra Contratista';
+        } else {
+          subcontratistaFinal = selVal || 'Contratista';
+        }
+      }
+
+      let nombreEvaluadorFinal = 'Anónimo';
+      if (esJefatura) {
+        nombreEvaluadorFinal = (usuarioActual && usuarioActual.nombre) ? usuarioActual.nombre : (rolLogueado === 'JEFE_DEPARTAMENTO' ? 'Edder (Jefe Dpto)' : 'Jefe de Sección');
+      } else {
+        nombreEvaluadorFinal = document.getElementById('input-nombre-evaluador').value.trim() || (usuarioActual.dni ? `DNI ${usuarioActual.dni}` : 'Anónimo');
+      }
+
       const registro = {
         id: 'eval-' + Date.now(),
         fecha: new Date().toISOString(),
         rol: rolLogueado,
         supervisorId: supervisorSeleccionado.id,
         supervisorNombre: supervisorSeleccionado.nombre,
-        contratista: (rolLogueado === 'JEFE_SECCION' || rolLogueado === 'LUZ_DEL_SUR') ? 'N/A' : (document.getElementById('select-subcontratista').value || 'Contratista'),
-        evaluador: (rolLogueado === 'JEFE_SECCION') ? 'Jefe de Sección' : (document.getElementById('input-nombre-evaluador').value.trim() || 'Anónimo'),
-        proyecto: (rolLogueado === 'JEFE_SECCION') ? 'General' : (document.getElementById('input-proyecto').value.trim() || 'General'),
+        contratista: subcontratistaFinal,
+        evaluador: nombreEvaluadorFinal,
+        dni: usuarioActual.dni || '',
+        proyecto: esJefatura ? 'Evaluación General' : (document.getElementById('input-proyecto').value.trim() || 'General'),
         respuestas: respuestasActuales
       };
 
       let historial = JSON.parse(localStorage.getItem('evaluaciones_20_20') || '[]');
       
-      if (rolLogueado === 'JEFE_SECCION') {
-        historial = historial.filter(h => !(h.supervisorId === supervisorSeleccionado.id && h.rol === 'JEFE_SECCION'));
+      if (esJefatura) {
+        historial = historial.filter(h => !(h.supervisorId === supervisorSeleccionado.id && (h.rol === 'JEFE_SECCION' || h.rol === 'JEFE_DEPARTAMENTO')));
       }
 
       historial.push(registro);
@@ -1241,7 +1615,7 @@
 
       actualizarEstadisticasJefatura();
 
-      if (rolLogueado === 'JEFE_SECCION') {
+      if (esJefatura) {
         mostrarPantalla('pantalla-jefatura');
         renderizarTablaSupervisores();
         alert(`¡Evaluación de los 20 comportamientos guardada exitosamente para ${supervisorSeleccionado.nombre}!`);
@@ -1261,7 +1635,7 @@
       let ldsCount = 0;
 
       historial.forEach(e => {
-        if (e.rol === 'JEFE_SECCION') jefeCount++;
+        if (e.rol === 'JEFE_SECCION' || e.rol === 'JEFE_DEPARTAMENTO') jefeCount++;
         else if (e.rol === 'CAPATAZ') capatazCount++;
         else if (e.rol === 'COORD_CONTRATISTA') coordCount++;
         else if (e.rol === 'LUZ_DEL_SUR') ldsCount++;
@@ -1415,21 +1789,52 @@
       if (document.getElementById('kpi-pilar-bla-nota')) document.getElementById('kpi-pilar-bla-nota').textContent = calcPilar('HABILIDADES_BLANDAS');
     }
 
-    // Tabla del Jefe de Sección
+    // Variable de Filtro de Sección / CR para la tabla
+    let filtroCRActual = 'TODOS';
+
+    function filtrarTablaPorCR(cr) {
+      filtroCRActual = cr;
+      ['btn-filtro-cr-todos', 'btn-filtro-cr-4301', 'btn-filtro-cr-4070'].forEach(id => {
+        const btn = document.getElementById(id);
+        if (btn) btn.className = 'px-2.5 py-1 text-xs rounded-lg font-bold text-slate-600 hover:bg-slate-100';
+      });
+
+      const idActivo = cr === 'TODOS' ? 'btn-filtro-cr-todos' : (cr === '4301' ? 'btn-filtro-cr-4301' : 'btn-filtro-cr-4070');
+      const bActivo = document.getElementById(idActivo);
+      if (bActivo) bActivo.className = 'px-2.5 py-1 text-xs rounded-lg font-bold bg-slate-900 text-white';
+
+      const query = document.getElementById('filtro-tabla-nombre') ? document.getElementById('filtro-tabla-nombre').value : '';
+      renderizarTablaSupervisores(query);
+    }
+
+    // Tabla del Jefe de Sección y Departamento
     function renderizarTablaSupervisores(filtroNombre = '') {
       const tbody = document.getElementById('tabla-supervisores-cuerpo');
       tbody.innerHTML = '';
       const historial = JSON.parse(localStorage.getItem('evaluaciones_20_20') || '[]');
       const kpisDuros = JSON.parse(localStorage.getItem('kpis_duros_20_20') || '{}');
 
-      const lista = SUPERVISORES.filter(s => 
-        s.nombre.toLowerCase().includes(filtroNombre.toLowerCase()) || 
-        s.cr.includes(filtroNombre)
-      );
+      // Actualizar badge de usuario activo en jefatura
+      const badgeJefe = document.getElementById('badge-jefatura-usuario');
+      if (badgeJefe && usuarioActual && usuarioActual.nombre) {
+        badgeJefe.innerHTML = `<i data-lucide="${usuarioActual.rol === 'JEFE_DEPARTAMENTO' ? 'crown' : 'shield-check'}" class="w-3.5 h-3.5 text-amberBrand-400"></i><span>${usuarioActual.nombre}</span>`;
+      }
+
+      let lista = SUPERVISORES;
+      if (filtroCRActual !== 'TODOS') {
+        lista = lista.filter(s => s.cr === filtroCRActual);
+      }
+
+      if (filtroNombre) {
+        lista = lista.filter(s => 
+          s.nombre.toLowerCase().includes(filtroNombre.toLowerCase()) || 
+          s.cr.includes(filtroNombre)
+        );
+      }
 
       lista.forEach(s => {
         const evalsSup = historial.filter(h => h.supervisorId === s.id);
-        const evalJefe = evalsSup.find(h => h.rol === 'JEFE_SECCION');
+        const evalJefe = evalsSup.find(h => h.rol === 'JEFE_SECCION' || h.rol === 'JEFE_DEPARTAMENTO');
         const evalCapataz = evalsSup.find(h => h.rol === 'CAPATAZ');
         const evalCoord = evalsSup.find(h => h.rol === 'COORD_CONTRATISTA');
         const evalLDS = evalsSup.find(h => h.rol === 'LUZ_DEL_SUR');
@@ -1446,7 +1851,7 @@
 
         let promExternos = null;
         let sumExt = 0, countExt = 0;
-        evalsSup.filter(e => e.rol !== 'JEFE_SECCION').forEach(ev => {
+        evalsSup.filter(e => e.rol !== 'JEFE_SECCION' && e.rol !== 'JEFE_DEPARTAMENTO').forEach(ev => {
           Object.values(ev.respuestas).forEach(v => {
             if (v >= 0) { sumExt += v; countExt++; }
           });
@@ -1530,7 +1935,8 @@
 
     function evaluarSupervisorDesdeJefatura(supId) {
       const sup = SUPERVISORES.find(s => s.id === supId);
-      iniciarCuestionarioSupervisor(sup, 'JEFE_SECCION');
+      const rolUsar = (usuarioActual && usuarioActual.rol === 'JEFE_DEPARTAMENTO') ? 'JEFE_DEPARTAMENTO' : 'JEFE_SECCION';
+      iniciarCuestionarioSupervisor(sup, rolUsar);
     }
 
     // Modal de Data Dura
@@ -1573,7 +1979,7 @@
       const kpisDuros = JSON.parse(localStorage.getItem('kpis_duros_20_20') || '{}');
 
       const evalsSup = historial.filter(h => h.supervisorId === sup.id);
-      const evalJefe = evalsSup.find(h => h.rol === 'JEFE_SECCION');
+      const evalJefe = evalsSup.find(h => h.rol === 'JEFE_SECCION' || h.rol === 'JEFE_DEPARTAMENTO');
       const evalCapataz = evalsSup.find(h => h.rol === 'CAPATAZ');
       const evalCoord = evalsSup.find(h => h.rol === 'COORD_CONTRATISTA');
       const evalLDS = evalsSup.find(h => h.rol === 'LUZ_DEL_SUR');
@@ -1634,6 +2040,94 @@
       document.getElementById('modal-ficha-360').classList.add('hidden');
     }
 
+    // Generar y descargar la Matriz de Asignaciones en Excel para Edder (Jefe de Departamento)
+    function descargarPlantillaEdderXLSX() {
+      if (typeof XLSX === 'undefined') {
+        alert('Cargando librería de Excel, por favor intente en unos segundos.');
+        return;
+      }
+
+      const wb = XLSX.utils.book_new();
+
+      // HOJA 1: Supervisores vs Jefes de Sección
+      const dataHoja1 = SUPERVISORES.map((s, idx) => ({
+        'N°': idx + 1,
+        'ID Supervisor': s.id,
+        'Nombre del Supervisor': s.nombre,
+        'Cargo Escalera': s.cargo,
+        'Centro de Rendimiento': s.cr,
+        'Unidad / Descripción': s.crDesc,
+        'Jefe de Sección Responsable (Completar)': s.cr === '4070' ? 'Jefe Sección 3 (Planificación BT)' : (idx % 2 === 0 ? 'Jefe Sección 1 (Obras BT)' : 'Jefe Sección 2 (Obras BT)'),
+        'Zona Operativa Asignada': s.cr === '4070' ? 'Sede Central San Juan' : 'Lima Sur / Frente Operativo',
+        'Estado': 'Activo'
+      }));
+      const ws1 = XLSX.utils.json_to_sheet(dataHoja1);
+      XLSX.utils.book_append_sheet(wb, ws1, 'Supervisores_vs_JefesSec');
+
+      // HOJA 2: Supervisores vs Coordinadores de Proyecto Contratista
+      const subcontratistasList = [
+        'ALIHCOM BUILD SAC', 'ALVIMAR', 'CAMPOS LATAM', 'COSORCIO CARTER RENSA',
+        'ENCOSSA SAC', 'EOS', 'GRUCOIN S.A.C.', 'GRUPO ACUARIUS',
+        'GRUPO ENERGIA', 'KIMSA', 'NATURAL GAS COMPANY', 'PRODUCSA'
+      ];
+
+      const dataHoja2 = SUPERVISORES.map((s, idx) => ({
+        'N°': idx + 1,
+        'ID Supervisor': s.id,
+        'Nombre del Supervisor': s.nombre,
+        'CR': s.cr,
+        'Empresa Subcontratista Asignada': subcontratistasList[idx % subcontratistasList.length],
+        'DNI Coordinador Proyecto (8 dígitos)': '',
+        'Nombre Completo del Coordinador': '',
+        'Teléfono de Contacto': '',
+        'Correo Institucional': ''
+      }));
+      const ws2 = XLSX.utils.json_to_sheet(dataHoja2);
+      XLSX.utils.book_append_sheet(wb, ws2, 'Supervisores_vs_Coord');
+
+      // HOJA 3: Supervisores vs Capataces de Campo
+      const dataHoja3 = SUPERVISORES.map((s, idx) => ({
+        'N°': idx + 1,
+        'ID Supervisor': s.id,
+        'Nombre del Supervisor': s.nombre,
+        'CR': s.cr,
+        'Empresa Subcontratista': subcontratistasList[idx % subcontratistasList.length],
+        'DNI Capataz (8 dígitos)': '',
+        'Nombre Completo del Capataz': '',
+        'Tipo de Cuadrilla': 'Obras BT / Redes y Empalmes',
+        'Frente Habitual': 'Zona Asignada'
+      }));
+      const ws3 = XLSX.utils.json_to_sheet(dataHoja3);
+      XLSX.utils.book_append_sheet(wb, ws3, 'Supervisores_vs_Capataces');
+
+      // HOJA 4: Supervisores vs Proyectistas / Inspectores Luz del Sur (LDS)
+      const dataHoja4 = SUPERVISORES.map((s, idx) => ({
+        'N°': idx + 1,
+        'ID Supervisor': s.id,
+        'Nombre del Supervisor': s.nombre,
+        'CR': s.cr,
+        'Sector / Distrito Luz del Sur': 'Sector Operativo LDS',
+        'Inspector Luz del Sur Asignado': '',
+        'Proyectista LDS Responsable': '',
+        'Contacto LDS': ''
+      }));
+      const ws4 = XLSX.utils.json_to_sheet(dataHoja4);
+      XLSX.utils.book_append_sheet(wb, ws4, 'Supervisores_vs_LuzDelSur');
+
+      // HOJA 5: Catálogo de las 12 Subcontratistas Homologadas
+      const dataHoja5 = subcontratistasList.map((emp, i) => ({
+        'N°': i + 1,
+        'Razón Social Subcontratista': emp,
+        'Estado': 'Homologada Tecsur / LDS',
+        'Ámbito Operativo': 'Obras Baja Tensión'
+      }));
+      const ws5 = XLSX.utils.json_to_sheet(dataHoja5);
+      XLSX.utils.book_append_sheet(wb, ws5, '12_Contratistas_Oficiales');
+
+      const fecha = new Date().toISOString().slice(0, 10);
+      XLSX.writeFile(wb, `matriz_requerimiento_asignaciones_edder_tecsur_${fecha}.xlsx`);
+    }
+
     // Exportar Libro Excel Nativo (.xlsx) con Múltiples Hojas usando SheetJS
     function exportarExcelCompletoXLSX() {
       if (typeof XLSX === 'undefined') {
@@ -1648,7 +2142,7 @@
 
       const datosScorecard = SUPERVISORES.map(s => {
         const evalsSup = historial.filter(h => h.supervisorId === s.id);
-        const evalJefe = evalsSup.find(h => h.rol === 'JEFE_SECCION');
+        const evalJefe = evalsSup.find(h => h.rol === 'JEFE_SECCION' || h.rol === 'JEFE_DEPARTAMENTO');
         const evalCap = evalsSup.find(h => h.rol === 'CAPATAZ');
         const evalCoord = evalsSup.find(h => h.rol === 'COORD_CONTRATISTA');
         const evalLDS = evalsSup.find(h => h.rol === 'LUZ_DEL_SUR');
@@ -1714,6 +2208,7 @@
             'Fecha y Hora': ev.fecha,
             'Rol Evaluador': ev.rol,
             'Subcontratista': ev.contratista || 'N/A',
+            'DNI Evaluador': ev.dni || '-',
             'Nombre Evaluador': ev.evaluador || 'Anónimo',
             'Proyecto / SST': ev.proyecto || 'General',
             'Supervisor': sup.nombre,
