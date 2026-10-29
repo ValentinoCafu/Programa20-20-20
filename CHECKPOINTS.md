@@ -112,6 +112,25 @@ Este documento registra los hitos, decisiones de arquitectura y el progreso del 
   4. `Supervisores_vs_LuzDelSur` (Mapeo de supervisor con inspector y proyectista LDS)
   5. `12_Contratistas_Oficiales` (Catálogo maestro de las 12 homologadas)
 
+---
+
+## 📌 Hito 11: Implementación del Marco Conductual de Martín (Eval 360) · [COMPLETADO]
+- **Adopción de la Matriz Fenomenológica y Redacción Verbatim de Martín:**
+  - **Capataz de Cuadrilla (17 comportamientos):**
+    - 12 observables directos en campo + 5 efectos indirectos de la gestión previa del supervisor (materiales disponibles, herramientas operativas, permisos policiales/viales listos, papeles SST sin esperas, asignación clara de frentes).
+    - Ítems: `[1, 2, 3, 4, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18, 19]`. Excluye 5 (planificación macro), 10 (planificación preventiva) y 20 (cierre económico/documentario).
+  - **Coordinador de Proyectos Contratista (Núcleo de 11 comportamientos):**
+    - Opción elegida: Núcleo sugerido por Martín para un instrumento corto, de alto impacto y sin ruido operativo redundante.
+    - Ítems: `[2, 4, 7, 9, 11, 12, 15, 16, 18, 19, 20]`.
+    - Evalúa: contraste con planos (2), anticipación de interferencias (4), despacho oportuno de materiales (7), permisos y resguardos (9), charla de 5 min registrada (11), uso y control de EPPs (12), presencia en hitos críticos (15), orientación técnica clara (16), paralización ante riesgo inminente (18), gestión de cambios/replanteos (19) y cierre conforme sin pendientes (20).
+  - **Proyectista / Inspector Luz del Sur (6 comportamientos de impacto cliente):**
+    - Focalizado exclusivamente en la frontera cliente-contratista: contraste con planos y normas LDS (2), alerta temprana de interferencias (4), señalización pública y terceros (13), calidad en momentos críticos (15), replanteos autorizados (19) y entrega de SST conforme a tiempo (20).
+    - Ítems: `[2, 4, 13, 15, 19, 20]`. Excluye auditorías internas de Tecsur.
+  - **Línea de Mando Jefatura (20 comportamientos ancla):**
+    - Conserva los 20 comportamientos estándar del Kit del Rol Tecsur para contrastar y calibrar las perspectivas externas.
+- **Redacción de Preguntas:** Adaptada estrictamente desde la experiencia fenomenológica de cada evaluador conforme al documento de trabajo `Plantilla_Trabajo_Martin_Eval360_Parte-completa-MO.docx`.
+
+
 
 
 
