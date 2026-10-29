@@ -130,6 +130,24 @@ Este documento registra los hitos, decisiones de arquitectura y el progreso del 
     - Conserva los 20 comportamientos estándar del Kit del Rol Tecsur para contrastar y calibrar las perspectivas externas.
 - **Redacción de Preguntas:** Adaptada estrictamente desde la experiencia fenomenológica de cada evaluador conforme al documento de trabajo `Plantilla_Trabajo_Martin_Eval360_Parte-completa-MO.docx`.
 
+---
+
+## 📌 Hito 12: Implementación de la Escala Híbrida de Evaluación (BARS 1 al 5 + Mapeo P&C Tecsur 0-120) · [COMPLETADO]
+- **Frontend / UX Evaluador (Buenas prácticas McKinsey, Right Management y Korn Ferry):**
+  - Sustitución de los números abstractos (0–120) por la escala conductual BARS de 5 niveles + opción de no observabilidad:
+    - **1 · Ausente** (0 pts) · No ocurre o no hay evidencia.
+    - **2 · Irregular** (50 pts) · Ocurre a veces o con omisiones.
+    - **3 · En parte** (75 pts) · Mayoría de casos, con apoyo.
+    - **4 · Conforme** (100 pts · Meta esperada) · Estándar esperado en campo.
+    - **5 · Sostenido** (120 pts · Referente) · Modela, anticipa y enseña.
+    - **N/A · No observado** (Sin nota) · Previene respuestas forzadas o sesgos de indulgencia.
+  - Mitigación del sesgo de aversión cultural al "0" y clarificación de que el nivel 4 es la meta estándar esperada.
+- **Backend y Compatibilidad Corporativa (Gobernanza Edder y P&C Tecsur):**
+  - Mantiene internamente los puntajes ponderados de Tecsur (`0, 50, 75, 100, 120`).
+  - Exportables de Excel y CSV enriquecidos con ambas dimensiones: `Nivel BARS (1-5)` y `Puntaje Tecsur (0-120)`.
+  - Scorecard de supervisores incluye conversión lineal continua a escala de 1.0 a 5.0.
+
+
 
 
 

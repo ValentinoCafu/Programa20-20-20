@@ -9,17 +9,23 @@ export type RolEvaluador =
 export type CriterioEvaluacion = 'SEGURIDAD' | 'OBJETIVOS' | 'CALIDAD' | 'HABILIDADES_BLANDAS';
 
 export interface EscalaNivel {
+  nivel: number;
   valor: number;
   etiqueta: string;
   descripcion: string;
 }
 
+/**
+ * Escala Híbrida de Evaluación Conductual (BARS 1 al 5 + Equivalencia P&C Tecsur 0-120)
+ * Sigue las recomendaciones de McKinsey y Right Management para el evaluador en campo (1 al 5),
+ * manteniendo la equivalencia oficial con Personas & Cultura de Tecsur (0, 50, 75, 100, 120 pts).
+ */
 export const ESCALA_TECSUR: EscalaNivel[] = [
-  { valor: 0, etiqueta: 'Ausente (0)', descripcion: 'El comportamiento no ocurre o no hay evidencia de que ocurra.' },
-  { valor: 50, etiqueta: 'Irregular (50)', descripcion: 'Ocurre a veces; depende del día, del frente o de que alguien lo recuerde.' },
-  { valor: 75, etiqueta: 'Conforme en parte (75)', descripcion: 'Ocurre en la mayoría de los casos, con apoyo o con omisiones no críticas.' },
-  { valor: 100, etiqueta: 'Conforme (100)', descripcion: 'Ocurre como se describe, con evidencia verificable en la visita y en los registros.' },
-  { valor: 120, etiqueta: 'Sostenido (120)', descripcion: 'Ocurre siempre, sin supervisión; modela y exige en su equipo.' },
+  { nivel: 1, valor: 0, etiqueta: '1 · Ausente (0 pts)', descripcion: 'El comportamiento no ocurre o no hay evidencia de que ocurra.' },
+  { nivel: 2, valor: 50, etiqueta: '2 · Irregular (50 pts)', descripcion: 'Ocurre a veces; depende del día, del frente o de que alguien lo recuerde.' },
+  { nivel: 3, valor: 75, etiqueta: '3 · Conforme en parte (75 pts)', descripcion: 'Ocurre en la mayoría de los casos, con apoyo o con omisiones no críticas.' },
+  { nivel: 4, valor: 100, etiqueta: '4 · Conforme - Meta esperada (100 pts)', descripcion: 'Ocurre como se describe, con evidencia verificable en la visita y en los registros.' },
+  { nivel: 5, valor: 120, etiqueta: '5 · Sostenido / Referente (120 pts)', descripcion: 'Ocurre siempre, sin supervisión; modela y exige en su equipo.' },
 ];
 
 export interface Comportamiento {
